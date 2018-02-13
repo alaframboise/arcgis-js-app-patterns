@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://www.esri.com/favicon.ico">
+
+    <title>ArcGIS JS v4 CSS App Design</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <style>
+      :root {
+        --jumbotron-padding-y: 3rem;
+      }
+
+      .jumbotron {
+        padding-top: var(--jumbotron-padding-y);
+        padding-bottom: var(--jumbotron-padding-y);
+        margin-bottom: 0;
+        background-color: #fff;
+      }
+      @media (min-width: 768px) {
+        .jumbotron {
+          padding-top: calc(var(--jumbotron-padding-y) * 2);
+          padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+        }
+      }
+
+      .jumbotron p:last-child {
+        margin-bottom: 0;
+      }
+
+      .jumbotron-heading {
+        font-weight: 300;
+      }
+
+      .jumbotron .container {
+        max-width: 40rem;
+      }
+
+      footer {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+      }
+
+      footer p {
+        margin-bottom: .25rem;
+      }
+
+      .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+      .card-top {
+        display: -ms-flexbox;
+        -ms-flex-pack: center;
+        justify-content: center;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 195px;
+      }
+
+      .svg-icon {
+        display: inline-block;
+        position: absolute;
+        top: calc(50% - 50px);
+        right: 0;
+        left: 0;
+        height: 100px;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        color: white;
+        fill: currentColor;
+      }
+
+      .card-blue {
+        background-color: #0079c1;
+      }
+
+      .card-light-blue {
+        background-color: #56a5d8;
+      }
+
+      .card-green {
+        background-color: #338033;
+      }
+
+      .card-orange {
+        background-color: #d17e21;
+      }
+
+      .card-purple {
+        background-color: #7461a8;
+      }
+
+      .card-brown {
+        background-color: #8c5e2a;
+      }
+
+      .card-red {
+        background-color: #ab3c16;
+      }
+
+
+    </style>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="collapse bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4 class="text-white">ArcGIS JS v4 CSS App Design</h4>
+              <p class="text-muted">Examples of how to design and style apps using the ArcGIS JS v4 API. Do more with less CSS.</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4 class="text-white">Presenters</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Allan Laframboise</a></li>
+                <li><a href="#" class="text-white">Juan Carlos Franco</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark box-shadow">
+        <div class="container d-flex justify-content-between">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <strong>2018 Dev Summit</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">ArcGIS JS v4 App Design and CSS Styling</h1>
+          <p class="lead text-muted">Examples of how to accomplish simple design and styling tasks when building map apps.</p>
+          <p>
+            <a href="#" class="btn btn-outline-primary my-2">Get the code</a>
+            <a href="http://developers.arcgis.com/javascript/" class="btn btn-outline-success my-2">Learn more</a>
+          </p>
+        </div>
+      </section>
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-blue">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M3.1 3.1v41.8h41.8V3.1zm41 41H3.9V3.9h40.2zm-3.2-37H7.1v8.8h33.8zm-.8 8H7.9V7.9h32.2z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Layout - Full Page</h5>
+                  <p class="card-text">100% height and width maps.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="1. Layouts/full-page.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-blue">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M3.1 3.1v41.8h41.8V3.1zm41 41H3.9V3.9h40.2zm-3.2-37H7.1v8.8h33.8zm-.8 8H7.9V7.9h32.2z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Layout - Flex Grid</h5>
+                  <p class="card-text">Partial-page maps.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="1. Layouts/partial-page-flex.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-blue">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M3.1 3.1v41.8h41.8V3.1zm41 41H3.9V3.9h40.2zm-3.2-37H7.1v8.8h33.8zm-.8 8H7.9V7.9h32.2z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Layout - CSS Grid</h5>
+                  <p class="card-text">Partial-page maps.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="1. Layouts/partial-page-css-grid.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-purple">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M7.9 33.5a1.4 1.4 0 1 1-1.4-1.4 1.402 1.402 0 0 1 1.4 1.4zm-.8 0a.6.6 0 1 0-.6.6.6.6 0 0 0 .6-.6zM39.018 8.589a9.894 9.894 0 0 1-3.886 7.231 6.534 6.534 0 0 1-5.69.849 2.704 2.704 0 0 0-2.747.762L8.768 36.797a3.9 3.9 0 1 1-5.526-5.505l20.293-16.98a2.71 2.71 0 0 0 .861-2.843 6.86 6.86 0 0 1 1.264-6.71 9.442 9.442 0 0 1 8.62-2.587.518.518 0 0 1 .228.924l-5.624 4.33.905 3.82 3.475 1.216 4.895-4.306a.519.519 0 0 1 .859.433zm-.888.659l-4.69 4.124-4.329-1.518-1.125-4.747 5.502-4.235a10.54 10.54 0 0 0-1.09-.057A8.135 8.135 0 0 0 26.26 5.29a6.012 6.012 0 0 0-1.095 5.954 3.51 3.51 0 0 1-1.116 3.682L3.782 31.882A3.07 3.07 0 0 0 2.9 34.05a3.1 3.1 0 0 0 5.292 2.191l17.916-19.354a3.485 3.485 0 0 1 3.557-.987 5.767 5.767 0 0 0 5.015-.74 8.896 8.896 0 0 0 3.45-5.913zm-10.825 22.01L22.024 37.5l5.281 6.241-.61.518-5.719-6.759 5.719-6.759zm10.5-.517l-.61.518 5.281 6.241-5.281 6.241.61.518 5.719-6.759zm-9.168 13.091l.726.336 6-13-.726-.336z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Frameworks - Bootstrap 4</h5>
+                  <p class="card-text">Responsive maps in Bootstrap.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="2. Frameworks/bootstrap-page.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-red">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M31 11.1h5.9V17h-.8v-4.455L24.547 24.1H29v.8h-5.9V19h.8v4.613L35.614 11.9H31zm-24.9 16h14.8v14.8H6.1zm.8 14h13.2V27.9H6.9zm0-21.1h-.8v4h.8zm0-7h-.8v4h.8zM31 41.9h4v-.8h-4zm-7 0h4v-.8h-4zM6.9 6.9H11v-.8H6.1V10h.8zM38 6.1v.8h3.1V10h.8V6.1zm-19 0h-5v.8h5zm8 0h-5v.8h5zm8 0h-5v.8h5zM41.1 34h.8v-5h-.8zm0-8h.8v-5h-.8zm0-8h.8v-5h-.8zm0 23.1H38v.8h3.9V37h-.8z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">View - Padding</h5>
+                  <p class="card-text">Set the visible and usable map area.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="3. View/view-padding.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-red">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M31 11.1h5.9V17h-.8v-4.455L24.547 24.1H29v.8h-5.9V19h.8v4.613L35.614 11.9H31zm-24.9 16h14.8v14.8H6.1zm.8 14h13.2V27.9H6.9zm0-21.1h-.8v4h.8zm0-7h-.8v4h.8zM31 41.9h4v-.8h-4zm-7 0h4v-.8h-4zM6.9 6.9H11v-.8H6.1V10h.8zM38 6.1v.8h3.1V10h.8V6.1zm-19 0h-5v.8h5zm8 0h-5v.8h5zm8 0h-5v.8h5zM41.1 34h.8v-5h-.8zm0-8h.8v-5h-.8zm0-8h.8v-5h-.8zm0 23.1H38v.8h3.9V37h-.8z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">View - Events</h5>
+                  <p class="card-text">Listen for height and width changes.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="3. View/view-events.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-red">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M31 11.1h5.9V17h-.8v-4.455L24.547 24.1H29v.8h-5.9V19h.8v4.613L35.614 11.9H31zm-24.9 16h14.8v14.8H6.1zm.8 14h13.2V27.9H6.9zm0-21.1h-.8v4h.8zm0-7h-.8v4h.8zM31 41.9h4v-.8h-4zm-7 0h4v-.8h-4zM6.9 6.9H11v-.8H6.1V10h.8zM38 6.1v.8h3.1V10h.8V6.1zm-19 0h-5v.8h5zm8 0h-5v.8h5zm8 0h-5v.8h5zM41.1 34h.8v-5h-.8zm0-8h.8v-5h-.8zm0-8h.8v-5h-.8zm0 23.1H38v.8h3.9V37h-.8z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">View - Breakpoints</h5>
+                  <p class="card-text">Screen size changes and notification.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="3. View/view-breakpoints.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top bg-dark">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M27.1 4.1v40.8h17.8V4.1zm17 40H27.9V4.9h16.2zm-41-21.2h20.8V4.1H3.1zm.8-18h19.2v17.2H3.9zm-.8 40h20.8V26.1H3.1zm.8-18h19.2v17.2H3.9z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">UI - Default</h5>
+                  <p class="card-text">Position elements in corners (padding).</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="4. UI/default-ui.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top bg-dark"> 
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M27.1 4.1v40.8h17.8V4.1zm17 40H27.9V4.9h16.2zm-41-21.2h20.8V4.1H3.1zm.8-18h19.2v17.2H3.9zm-.8 40h20.8V26.1H3.1zm.8-18h19.2v17.2H3.9z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">UI - Manual</h5>
+                  <p class="card-text">Position elements in the view (padding).</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="4. UI/manual-ui.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top bg-dark"> 
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M27.1 4.1v40.8h17.8V4.1zm17 40H27.9V4.9h16.2zm-41-21.2h20.8V4.1H3.1zm.8-18h19.2v17.2H3.9zm-.8 40h20.8V26.1H3.1zm.8-18h19.2v17.2H3.9z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">UI - Custom</h5>
+                  <p class="card-text">Position elements in view (no padding).</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="4. UI/custom-ui.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-light-blue">
+                   <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M46.5 7.1h-45A1.401 1.401 0 0 0 .1 8.5v29a1.401 1.401 0 0 0 1.4 1.4h45a1.401 1.401 0 0 0 1.4-1.4v-29a1.401 1.401 0 0 0-1.4-1.4zm.6 30.4a.6.6 0 0 1-.6.6h-45a.6.6 0 0 1-.6-.6v-29a.6.6 0 0 1 .6-.6h45a.6.6 0 0 1 .6.6zM18 42.1h12v.8H18zm9.9-3.1v3h-.8v-3zm-7 0v3h-.8v-3zm-3.4-19.9a6.4 6.4 0 1 0 6.4 6.4 6.407 6.407 0 0 0-6.4-6.4zm4.579 3.186l-4.18 2.508V19.92a5.594 5.594 0 0 1 4.18 2.366zM11.899 25.5a5.603 5.603 0 0 1 5.201-5.58v5.746l4.062 4.061A5.592 5.592 0 0 1 11.9 25.5zm9.828 3.662l-3.582-3.583 4.345-2.607a5.56 5.56 0 0 1-.763 6.19zM34.1 25.1h-2.2v-4h-3.8v10.8h9.8V17.1h-3.8zm-3 6h-2.2v-9.2h2.2v9.2zm3 0h-2.2v-5.2h2.2zm.8-13.2h2.2v13.2h-2.2V17.9zm8.1-6h-2v-.8h2zm-3 0h-2v-.8h2zM2.5 13.1h43v.8h-43z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Widgets - Custom Button</h5>
+                  <p class="card-text">Create a simple button.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="5. Widgets/custom-button.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-light-blue">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M46.5 7.1h-45A1.401 1.401 0 0 0 .1 8.5v29a1.401 1.401 0 0 0 1.4 1.4h45a1.401 1.401 0 0 0 1.4-1.4v-29a1.401 1.401 0 0 0-1.4-1.4zm.6 30.4a.6.6 0 0 1-.6.6h-45a.6.6 0 0 1-.6-.6v-29a.6.6 0 0 1 .6-.6h45a.6.6 0 0 1 .6.6zM18 42.1h12v.8H18zm9.9-3.1v3h-.8v-3zm-7 0v3h-.8v-3zm-3.4-19.9a6.4 6.4 0 1 0 6.4 6.4 6.407 6.407 0 0 0-6.4-6.4zm4.579 3.186l-4.18 2.508V19.92a5.594 5.594 0 0 1 4.18 2.366zM11.899 25.5a5.603 5.603 0 0 1 5.201-5.58v5.746l4.062 4.061A5.592 5.592 0 0 1 11.9 25.5zm9.828 3.662l-3.582-3.583 4.345-2.607a5.56 5.56 0 0 1-.763 6.19zM34.1 25.1h-2.2v-4h-3.8v10.8h9.8V17.1h-3.8zm-3 6h-2.2v-9.2h2.2v9.2zm3 0h-2.2v-5.2h2.2zm.8-13.2h2.2v13.2h-2.2V17.9zm8.1-6h-2v-.8h2zm-3 0h-2v-.8h2zM2.5 13.1h43v.8h-43z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Widgets - Custom Control</h5>
+                  <p class="card-text">Put your div in the view.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="5. Widgets/custom-control.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-brown">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M33.9 26.1V21h-.8v5.1h-14v6H13.38l-5.48 3.652V32.1h-3V18.9H17v-.8H4.1v14.8h3v4.348l6.521-4.348h5.48v8h3v4.386l6.03-4.386H43.9V26.1zm9.2 14H27.87l-4.97 3.614V40.1h-3V26.9h23.2zm-20-17.875l5.277-3.325H39.9V4.1H19.1v14.8h4zM19.9 18.1V4.9h19.2v13.2H28.146L23.9 20.775V18.1z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Popups - Docking</h5>
+                  <p class="card-text">Control the position.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="6. Popups/docking.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+             <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-brown">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M33.9 26.1V21h-.8v5.1h-14v6H13.38l-5.48 3.652V32.1h-3V18.9H17v-.8H4.1v14.8h3v4.348l6.521-4.348h5.48v8h3v4.386l6.03-4.386H43.9V26.1zm9.2 14H27.87l-4.97 3.614V40.1h-3V26.9h23.2zm-20-17.875l5.277-3.325H39.9V4.1H19.1v14.8h4zM19.9 18.1V4.9h19.2v13.2H28.146L23.9 20.775V18.1z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Popups - Sizing</h5>
+                  <p class="card-text">Control the width and height.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="6. Popups/sizing.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-green">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M3.1 4.1v10.8h42.8V4.1zm42 10H3.9V4.9h41.2zm-42 30.8h32.8V18.1H3.1zm.8-26h31.2v25.2H3.9zm35.2 26h6.8V18.1h-6.8zm.8-26h5.2v25.2h-5.2z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Panels - Custom Panel</h5>
+                  <p class="card-text">Show and hide a panel with a button.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="7. Panels/custom-panel.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-green"> 
+                   <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M3.1 4.1v10.8h42.8V4.1zm42 10H3.9V4.9h41.2zm-42 30.8h32.8V18.1H3.1zm.8-26h31.2v25.2H3.9zm35.2 26h6.8V18.1h-6.8zm.8-26h5.2v25.2h-5.2z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Panels - Responsive Expand</h5>
+                  <p class="card-text">Show and hide the legend in a panel.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="7. Panels/responsive-expand.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+             <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-green">
+                  <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M3.1 4.1v10.8h42.8V4.1zm42 10H3.9V4.9h41.2zm-42 30.8h32.8V18.1H3.1zm.8-26h31.2v25.2H3.9zm35.2 26h6.8V18.1h-6.8zm.8-26h5.2v25.2h-5.2z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Panels - Popup Panel</h5>
+                  <p class="card-text">Put content in a docked popup.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="7. Panels/popup-panel.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-orange">
+                   <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M13.08 29.901a2.9 2.9 0 1 0-2.9-2.9 2.903 2.903 0 0 0 2.9 2.9zm0-5a2.1 2.1 0 1 1-2.101 2.1 2.103 2.103 0 0 1 2.1-2.1zm33.176-4.883a5.71 5.71 0 0 1-.324 6.053c-2.98 4.723-12.175 8.59-20.919 9.122l.89-.87c8.22-.713 16.595-4.308 19.352-8.679a4.891 4.891 0 0 0 .298-5.245c-.62-1.143-2.512-1.56-4.842-1.769l.673-.734c2.29.257 4.145.782 4.872 2.122zM11.98 18a2.9 2.9 0 1 0-2.9 2.9 2.903 2.903 0 0 0 2.9-2.9zm-2.9 2.1a2.1 2.1 0 1 1 2.1-2.1 2.103 2.103 0 0 1-2.1 2.1zm2.985 13.319C5.45 30.988 1.16 26.402 1.18 21.151c.03-8.108 10.172-14.857 22.61-15.045 2.796-.038 4.575.458 5.389 1.53.96 1.267.45 2.996-.045 4.667-.612 2.07-.895 3.371.346 4.006a7.386 7.386 0 0 0 1.036.425l.6.179c.195.051.415.084.62.128l-.71.668c-.04-.01-.086-.016-.126-.026l-.624-.185a8.163 8.163 0 0 1-1.16-.477c-1.922-.982-1.299-3.088-.75-4.945.439-1.48.892-3.011.176-3.955-.64-.844-2.23-1.253-4.74-1.215-12.005.181-21.794 6.573-21.822 14.248-.02 4.991 4.192 9.355 10.661 11.633-.095.09-.195.173-.284.273-.097.107-.195.23-.292.36zm7.015-23.318a2.9 2.9 0 1 0 2.9 2.9 2.903 2.903 0 0 0-2.9-2.9zm0 5a2.1 2.1 0 1 1 2.1-2.1 2.103 2.103 0 0 1-2.1 2.1zm25.613-5.695l-.004-.003c-.523-.515-1.434-.363-2.157.354L25.973 25.351l-8.45 8.202.052.053c-1.006.344-3.528 1.402-4.224 3.528a14.773 14.773 0 0 1-3.057 4.675l-.357.362.437.262a5.559 5.559 0 0 0 2.705.605 9.462 9.462 0 0 0 4.47-1.232 6.447 6.447 0 0 0 3.425-5.585v-.011l7.516-7.358 15.84-17.276c.731-.73.883-1.642.362-2.169zM17.172 41.1c-2.932 1.567-5.03 1.164-5.92.851a14.706 14.706 0 0 0 2.807-4.43.374.374 0 0 1 .11.12.57.57 0 0 1 .069.272c-.004 1.546 1.646 1.75 2.85 1.899a4.172 4.172 0 0 1 1.388.313 5.578 5.578 0 0 1-1.304.975zm1.835-1.575a3.923 3.923 0 0 0-1.82-.507c-1.3-.161-2.15-.325-2.15-1.103a1.363 1.363 0 0 0-.164-.655 1.166 1.166 0 0 0-.393-.427l-.086-.048a6.914 6.914 0 0 1 3.592-2.472l2.184 2.084a5.998 5.998 0 0 1-1.163 3.128zm24.745-28.503L27.915 28.295l-7.338 7.183-1.914-1.916 7.863-7.633 16.56-15.595c.418-.415.873-.52 1.04-.362.16.166.068.609-.374 1.05z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Styling - Default Themes</h5>
+                  <p class="card-text">Pre-cooked colors for widgets.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="8. Styling/default-themes.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <div class="card-top card-orange"> 
+                   <svg class="svg-icon" viewBox="0 0 48 48" width="100%" height="100%"><path d="M13.08 29.901a2.9 2.9 0 1 0-2.9-2.9 2.903 2.903 0 0 0 2.9 2.9zm0-5a2.1 2.1 0 1 1-2.101 2.1 2.103 2.103 0 0 1 2.1-2.1zm33.176-4.883a5.71 5.71 0 0 1-.324 6.053c-2.98 4.723-12.175 8.59-20.919 9.122l.89-.87c8.22-.713 16.595-4.308 19.352-8.679a4.891 4.891 0 0 0 .298-5.245c-.62-1.143-2.512-1.56-4.842-1.769l.673-.734c2.29.257 4.145.782 4.872 2.122zM11.98 18a2.9 2.9 0 1 0-2.9 2.9 2.903 2.903 0 0 0 2.9-2.9zm-2.9 2.1a2.1 2.1 0 1 1 2.1-2.1 2.103 2.103 0 0 1-2.1 2.1zm2.985 13.319C5.45 30.988 1.16 26.402 1.18 21.151c.03-8.108 10.172-14.857 22.61-15.045 2.796-.038 4.575.458 5.389 1.53.96 1.267.45 2.996-.045 4.667-.612 2.07-.895 3.371.346 4.006a7.386 7.386 0 0 0 1.036.425l.6.179c.195.051.415.084.62.128l-.71.668c-.04-.01-.086-.016-.126-.026l-.624-.185a8.163 8.163 0 0 1-1.16-.477c-1.922-.982-1.299-3.088-.75-4.945.439-1.48.892-3.011.176-3.955-.64-.844-2.23-1.253-4.74-1.215-12.005.181-21.794 6.573-21.822 14.248-.02 4.991 4.192 9.355 10.661 11.633-.095.09-.195.173-.284.273-.097.107-.195.23-.292.36zm7.015-23.318a2.9 2.9 0 1 0 2.9 2.9 2.903 2.903 0 0 0-2.9-2.9zm0 5a2.1 2.1 0 1 1 2.1-2.1 2.103 2.103 0 0 1-2.1 2.1zm25.613-5.695l-.004-.003c-.523-.515-1.434-.363-2.157.354L25.973 25.351l-8.45 8.202.052.053c-1.006.344-3.528 1.402-4.224 3.528a14.773 14.773 0 0 1-3.057 4.675l-.357.362.437.262a5.559 5.559 0 0 0 2.705.605 9.462 9.462 0 0 0 4.47-1.232 6.447 6.447 0 0 0 3.425-5.585v-.011l7.516-7.358 15.84-17.276c.731-.73.883-1.642.362-2.169zM17.172 41.1c-2.932 1.567-5.03 1.164-5.92.851a14.706 14.706 0 0 0 2.807-4.43.374.374 0 0 1 .11.12.57.57 0 0 1 .069.272c-.004 1.546 1.646 1.75 2.85 1.899a4.172 4.172 0 0 1 1.388.313 5.578 5.578 0 0 1-1.304.975zm1.835-1.575a3.923 3.923 0 0 0-1.82-.507c-1.3-.161-2.15-.325-2.15-1.103a1.363 1.363 0 0 0-.164-.655 1.166 1.166 0 0 0-.393-.427l-.086-.048a6.914 6.914 0 0 1 3.592-2.472l2.184 2.084a5.998 5.998 0 0 1-1.163 3.128zm24.745-28.503L27.915 28.295l-7.338 7.183-1.914-1.916 7.863-7.633 16.56-15.595c.418-.415.873-.52 1.04-.362.16.166.068.609-.374 1.05z" id="icons-ui-svg--base"></path></svg>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Styling - CSS Theme</h5>
+                  <p class="card-text">Quick widget overrides.</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <a target="_blank" href="8. Styling/css-theme.html" class="btn btn-sm btn-outline-primary">View</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right">
+          <a href="#">Back to top</a>
+        </p>
+        <p>Like this? Feel free to contribute on <a href="../../">GitHub</a>.</p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+  </body>
+</html>

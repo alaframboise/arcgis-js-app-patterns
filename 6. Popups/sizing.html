@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="App Design and CSS - Popup Sizing">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>App Design and CSS - Popups Sizing</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      font-family: "Avenir Next W00";
+    }
+
+    .header {
+      position: absolute;
+      display: flex;
+      width: 100%;
+      height: 55px;
+      z-index: 1;
+      color: #f8f8f8;
+      background: #8c5e2a;
+      font-size: 20px;
+    }
+    
+    .title {
+      margin: 15px;
+    }
+
+    /* Desktop - Floating */
+
+    .esri-view-width-small .esri-popup .esri-popup__main-container,
+    .esri-view-width-medium .esri-popup .esri-popup__main-container,
+    .esri-view-width-large .esri-popup .esri-popup__main-container,
+    .esri-view-width-xlarge .esri-popup .esri-popup__main-container {
+      width: 450px;
+    }
+
+    /* Desktop - Docked */
+
+    .esri-view-width-small .esri-popup .esri-popup--is-docked .esri-popup__main-container,
+    .esri-view-width-medium .esri-popup .esri-popup--is-docked .esri-popup__main-container ,
+    .esri-view-width-large .esri-popup .esri-popup--is-docked .esri-popup__main-container,
+    .esri-view-width-xlarge .esri-popup .esri-popup--is-docked .esri-popup__main-container{
+      width: 550px;
+    }
+    /* Mobile - Floating */
+
+    .esri-view-width-xsmall .esri-popup__main-container {
+      width: 250px;
+    }
+
+    /* Mobile - Docked */
+
+    .esri-view-width-xsmall .esri-popup  .esri-popup--is-docked-bottom-center .esri-popup__main-container {
+      width: 250px;
+      margin: 15px auto 30px;
+    }
+
+    
+
+  </style>
+  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.6/esri/css/main.css">
+  <script src="https://jsdev.arcgis.com/4.6/"></script>
+  <script>
+    require([
+      "esri/WebMap",
+      "esri/views/MapView",
+      "dojo/query",
+      "dojo/domReady!"
+    ], function(WebMap, MapView, query) {
+
+      var webmap = new WebMap({
+        portalItem: {
+          id: "773131c1992a453e870135fd485d7a60"
+        }
+      });
+
+      webmap.then(function(map){
+        query(".title")[0].innerHTML = "Popups - Sizing";
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: webmap,
+        zoom: 10,
+        padding: {top: 55},
+        popup: { dockOptions: {
+          breakpoint: false // prevent docking
+        }}
+      });
+         
+    });
+  </script>
+</head>
+<body>
+  <div class="header">
+    <div class="title"></div>
+  </div>
+  <div id="viewDiv"></div>
+</body>
+</html>

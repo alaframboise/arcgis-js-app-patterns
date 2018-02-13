@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="App Design and CSS - Themes">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>App Design and CSS - Default Themes</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      font-family: "Avenir Next W00";
+    }
+    
+    .header {
+      position: absolute;
+      display: flex;
+      width: 100%;
+      height: 55px;
+      z-index: 1;
+      color: #f8f8f8;
+      background: #d17e21;
+      font-size: 20px;
+    }
+    
+    .title, .theme-select {
+      flex: 1 1;
+      margin: 15px;
+    }
+
+    .title {
+      align-self: flex-start;
+    }
+
+    .theme-select {
+      flex-shrink: 2;
+      align-self: right;
+      max-width: 100px;
+      margin: 17px;
+    }
+
+  </style>
+  <link id="esriCssLink" rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <script>
+    require([
+      "esri/WebMap",
+      "esri/views/MapView",
+      "esri/widgets/Home",
+      "esri/widgets/Legend",
+      "esri/widgets/BasemapToggle",
+      "esri/widgets/ScaleBar",
+      "dojo/query",
+      "dojo/domReady!"
+    ], function(WebMap, MapView, Home, Legend, BasemapToggle, Scalebar, query) {
+
+      var webmap = new WebMap({
+        portalItem: {
+          id: "773131c1992a453e870135fd485d7a60"
+        }
+      });
+
+      webmap.then(function(map){
+        query(".title")[0].innerHTML = "Styling - Default Themes";
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: webmap,
+        zoom: 10,
+        padding: {top: 55},
+        ui: {components: 
+          ["zoom","compass","attribution"] // Define on create
+        }
+      });
+
+      var legend = new Legend({
+        view: view
+      });
+      view.ui.add(legend,"top-right");
+
+      var basemapToggle = new BasemapToggle({
+        view: view,
+        nextBasemap: "satellite"
+      });
+      view.ui.add(basemapToggle,"bottom-right");
+      
+      var scalebar = new Scalebar({
+        view: view
+      });
+      view.ui.add(scalebar,"bottom-left");
+
+      // Change theme
+
+      query("#theme").on("change", function(e){
+      	var theme = e.target.options[e.target.selectedIndex].value;
+      	var link = query("#esriCssLink")[0];
+        link.setAttribute("href", "https://jsdev.arcgis.com/4.7/esri/themes/" + theme + "/main.css");
+      });
+      
+    });
+  </script>
+</head>
+<body>
+<div class="header">
+    <div class="title"></div>
+  	<select name="theme" id="theme" class="theme-select">
+			<option value="light">light</option>
+			<option value="dark">dark</option>
+			<option value="dark-blue">dark-blue</option>
+			<option value="dark-green">dark-green</option>
+			<option value="dark-red">dark-red</option>
+			<option value="dark-purple">dark-purple</option>
+			<option value="light-blue">light-blue</option>
+			<option value="light-green">light-green</option>
+			<option value="light-red">light-red</option>
+			<option value="light-purple">light-purple</option>
+		</select>
+  </div>
+  <div id="viewDiv"></div>
+</body>
+</html>
+

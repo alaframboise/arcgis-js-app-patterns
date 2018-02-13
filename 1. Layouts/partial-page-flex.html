@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="App Design and CSS - Layout Partial Page Flex">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>App Design and CSS - Partial Page Flex</title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      font-family: "Avenir Next W00";
+    }
+
+    .wrapper {
+      display: flex;  
+      flex-flow: row wrap;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .wrapper > * {
+      padding: 10px;
+      flex: 1 100%;
+    }
+
+    .header {
+      background: #0079c1;
+    }
+
+    .footer {
+      background: #0079c1;
+    }
+
+    .map {
+    }
+
+    .aside-left {
+      background: #6d6d6d;
+    } 
+    
+    .aside-right {
+      background: #333;
+    }
+
+    @media all and (min-width: 544px) {
+      .aside { 
+        flex: 1 auto; 
+      }
+    }
+
+    @media all and (min-width: 780px) {
+      .map { 
+        flex: 4 0px;
+      }
+      .aside-left { 
+        order: 1; 
+      } 
+      .map    { 
+        order: 2; 
+      }
+      .aside-right { 
+        order: 3; 
+      }
+      .footer  { 
+        order: 4; 
+      }
+    }
+
+
+  </style>
+  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <script>
+    require([
+      "esri/WebMap",
+      "esri/views/MapView",
+      "dojo/domReady!"
+    ], function(WebMap, MapView) {
+
+      var webmap = new WebMap({
+        portalItem: {
+          id: "41281c51f9de45edaf1c8ed44bb10e30"
+        }
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: webmap
+      });
+      
+    });
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+  <header class="header">Header (Flex)</header>
+  <div class="map" id="viewDiv"></div>
+  <aside class="aside aside-left">Aside 1</aside>
+  <aside class="aside aside-right">Aside 2</aside>
+  <footer class="footer">Footer</footer>
+</div>
+  
+</body>
+</html>

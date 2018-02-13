@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="App Design and CSS - Button + Panel">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>App Design and CSS - Button + Panel</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      font-family: "Avenir Next W00";
+    }
+
+    .header {
+      position: absolute;
+      display: flex;
+      width: 100%;
+      height: 55px;
+      z-index: 1;
+      color: #f8f8f8;
+      background: #338033;
+      font-size: 20px;
+    }
+    
+    .title, .message {
+      flex: 1 1;
+      margin: 15px;
+    }
+
+    .title {
+      align-self: flex-start;
+    }
+    
+    #panel {
+      position: absolute;
+      top: 55px;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      background-color: #fff;
+    }
+    
+    #panel.panel-expanded {
+      width: 250px;
+    }
+        
+  </style>
+  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <script>
+    require([
+      "esri/WebMap",
+      "esri/views/MapView",
+      "esri/widgets/Legend",
+      "dojo/query",
+      "dojo/dom-construct",
+      "dojo/domReady!"
+    ], function(WebMap, MapView, Legend, query, domConstruct) {
+
+      var webmap = new WebMap({
+        portalItem: {
+          id: "773131c1992a453e870135fd485d7a60"
+        }
+      });
+
+      webmap.then(function(map){
+        query(".title")[0].innerHTML = "Panels - Button + Panel";
+      });
+
+      // Padding
+      
+      var padding = {top: 55};
+      var paddingExpanded = {top: 55, right: 250};
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: webmap,
+        padding: padding,
+        zoom: 10
+      });
+
+      // Panel
+
+      var panel = query("#panel")[0];      
+      var legend = new Legend({
+        view: view,
+        container: panel
+      });
+
+      // Custom Button (Widget)
+
+      var buttonWidget = domConstruct.create("div", {
+        id: "buttonWidget",
+        class: "esri-widget esri-component esri-widget-button esri-interactive",
+        innerHTML: "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>"
+      });
+
+      view.ui.add(buttonWidget, "top-right");
+
+      // Events
+      
+      query(buttonWidget).on("click", function(e){
+        var expanded = dojo.hasClass(panel, "panel-expanded");
+        if (!expanded) {
+          view.padding = paddingExpanded;
+          query(panel).addClass("panel-expanded");
+        } else {
+          view.padding = padding;
+          query(panel).removeClass("panel-expanded");
+        }
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div class="header">
+    <div class="title"></div>
+  </div>
+  <div id="viewDiv"></div>
+  <!-- Custom Panel -->
+  <div id="panel"></div>
+</body>
+</html>

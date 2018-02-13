@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="App Design and CSS - CSS Theme">
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>App Design and CSS - CSS Theme</title>
+  <style>
+    html, body, #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      font-family: "Avenir Next W00";
+    }
+
+    .header {
+      position: absolute;
+      display: flex;
+      width: 100%;
+      height: 55px;
+      z-index: 1;
+      color: #f8f8f8;
+      background: #d17e21;
+      font-size: 20px;
+    }
+    
+    .title {
+      flex: 1 1;
+      margin: 15px;
+    }
+
+    .title {
+      align-self: flex-start;
+    }
+
+    #search {
+      align-self: right;
+      margin: 13px;
+      width: 200px;
+    }
+
+    /* Widget containers and all buttons */
+
+    .theme .esri-widget,
+    .theme .esri-widget-button,
+    .theme .esri-widget .esri-menu,
+    .theme .esri-widget table,
+    .theme .esri-popup__main-container,
+    .theme .esri-popup .esri-popup__pointer-direction,
+    .theme .esri-popup .esri-popup__button,
+    .theme .esri-button,
+    .theme .esri-widget a {
+      background-color: #d17e21;
+      color: #f8f8f8;
+    }
+
+    /* Focus/hover states */
+
+    .theme .esri-widget-button:focus,
+    .theme .esri-widget-button:hover,
+    .theme .esri-widget .esri-menu li:focus,
+    .theme .esri-widget .esri-menu li:hover {
+      background-color: #b35c00;
+      color: #f8f8f8;
+    }
+
+    .theme .esri-button:focus,
+    .theme .esri-button:hover {
+      color: #fff;
+    }
+    
+    /* Zoom - Safer to resize individual buttons */
+    
+    .theme .esri-zoom .esri-widget-button,
+    .theme .esri-home.esri-widget-button {
+      width: 28px;
+      height: 28px;
+      font-size: 12px; 
+    }
+        
+    /* Basemap Toggle - Little smaller */
+
+    .theme .esri-basemap-toggle__container,
+    .theme .esri-basemap-toggle {
+      width: 45px;
+      height: 45px;
+    }
+
+    /* Legend - Little wider */
+    
+    .theme .esri-legend {
+      width: 250px;
+    }
+   
+    /* Scalebar - Lower position */
+    
+    .theme .esri-scale-bar {
+      margin-bottom: -15px;
+    }
+
+    /* Attribution - Do not override */
+    
+    .theme .esri-attribution,
+    .theme .esri-attribution a {
+      background: rgba(255,255,255,0.65);
+      color: #323232;
+    }
+    
+    /* Search - Do not override */
+ 
+    .theme .esri-widget.esri-search,
+    .theme .esri-search .esri-widget-button {
+      background-color: #f8f8f8;
+      color: #696969;
+    }
+    
+    .theme .esri-search .esri-widget-button {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .theme .esri-search .esri-widget-button,
+    .theme .esri-search .esri-search__input {
+      font-size: 12px;
+    } 
+
+    .theme .esri-widget .esri-menu {
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    /* Padding - Allow Legend and Attribution to remain full width */
+
+    .theme .esri-ui {
+      right: 0 !important;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <script>
+    require([
+      "esri/WebMap",
+      "esri/views/MapView",
+      "esri/widgets/Home",
+      "esri/widgets/Legend",
+      "esri/widgets/BasemapToggle",
+      "esri/widgets/ScaleBar",
+      "esri/widgets/Search",
+      "dojo/query",
+      "dojo/domReady!"
+    ], function(WebMap, MapView, Home, Legend, BasemapToggle, Scalebar, Search, query) {
+
+      var webmap = new WebMap({
+        portalItem: {
+          id: "773131c1992a453e870135fd485d7a60"
+        }
+      });
+
+      webmap.then(function(map){
+        query(".title")[0].innerHTML = "Styling - CSS Theme";
+      });
+
+      // View
+      
+      var view = new MapView({
+        container: "viewDiv",
+        map: webmap,
+        zoom: 10,
+        padding: {top: 55, right: 200}
+      });
+
+      // Widgets
+
+      var home = new Home({
+        view: view
+      });
+      view.ui.add(home, "top-left");
+      
+      var search = new Search({
+        view: view,
+        container: "search"
+      });
+
+      var scalebar = new Scalebar({
+        view: view
+      });
+      view.ui.add(scalebar,"bottom-left");
+
+      var legend = new Legend({
+        view: view
+      }); 
+      view.ui.add(legend, "top-right");   
+
+      var toggle = new BasemapToggle({
+        view: view
+      });
+      view.ui.add(toggle,"bottom-right");
+   
+    });
+  </script>
+</head>
+<body class="theme">
+  <div class="header">
+    <div class="title"></div>
+    <div id="search"></div>
+  </div>
+  <div id="viewDiv"></div>
+</body>
+</html>
