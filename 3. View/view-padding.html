@@ -49,41 +49,36 @@
     }   
 
   </style>
+
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
+  
   <script>
     require([
-      "esri/WebMap",
+      "esri/Map",
       "esri/views/MapView",
       "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, query) {
+    ], function(Map, MapView, query) {
 
-      var webmap = new WebMap({
-        portalItem: {
-          id: "773131c1992a453e870135fd485d7a60"
-        }
-      });
-
-      webmap.then(function(map){
-        query(".title")[0].innerHTML = " View - Padding";
-      });
+      var map = new Map({ basemap: "dark-gray" });
 
       var view = new MapView({
         container: "viewDiv",
-        map: webmap,
-        zoom: 10,
-        padding: {top: 55},
+        map: map,
+        zoom: 2,
+        padding: {top: 55}
       });
-
+      
       query(".message")[0].innerHTML = JSON.stringify(view.padding);
        
     });
   </script>
+
 </head>
 <body>
   <div class="header">
-    <div class="title"></div>
+    <div class="title">View - Padding</div>
     <div class="message"></div>
   </div>
   <div id="viewDiv"></div>

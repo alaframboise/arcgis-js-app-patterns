@@ -140,6 +140,7 @@
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
+
   <script>
     require([
       "esri/WebMap",
@@ -158,12 +159,6 @@
           id: "773131c1992a453e870135fd485d7a60"
         }
       });
-
-      webmap.then(function(map){
-        query(".title")[0].innerHTML = "Styling - CSS Theme";
-      });
-
-      // View
       
       var view = new MapView({
         container: "viewDiv",
@@ -201,10 +196,11 @@
    
     });
   </script>
+  
 </head>
 <body class="theme">
   <div class="header">
-    <div class="title"></div>
+    <div class="title">Styling - CSS Theme</div>
     <div id="search"></div>
   </div>
   <div id="viewDiv"></div>

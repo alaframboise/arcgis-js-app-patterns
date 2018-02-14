@@ -59,11 +59,11 @@
       margin: 15px auto 30px;
     }
 
-    
-
   </style>
+  
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.6/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.6/"></script>
+  
   <script>
     require([
       "esri/WebMap",
@@ -78,10 +78,6 @@
         }
       });
 
-      webmap.then(function(map){
-        query(".title")[0].innerHTML = "Popups - Sizing";
-      });
-
       var view = new MapView({
         container: "viewDiv",
         map: webmap,
@@ -94,10 +90,11 @@
          
     });
   </script>
+
 </head>
 <body>
   <div class="header">
-    <div class="title"></div>
+    <div class="title">Popups - Sizing</div>
   </div>
   <div id="viewDiv"></div>
 </body>

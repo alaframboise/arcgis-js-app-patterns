@@ -42,8 +42,10 @@
     }
 
   </style>
+
   <link id="esriCssLink" rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
+  
   <script>
     require([
       "esri/WebMap",
@@ -60,10 +62,6 @@
         portalItem: {
           id: "773131c1992a453e870135fd485d7a60"
         }
-      });
-
-      webmap.then(function(map){
-        query(".title")[0].innerHTML = "Styling - Default Themes";
       });
 
       var view = new MapView({
@@ -105,7 +103,7 @@
 </head>
 <body>
 <div class="header">
-    <div class="title"></div>
+    <div class="title">Styling - Default Themes</div>
   	<select name="theme" id="theme" class="theme-select">
 			<option value="light">light</option>
 			<option value="dark">dark</option>

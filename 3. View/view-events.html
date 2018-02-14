@@ -51,32 +51,28 @@
     }
 
   </style>
+  
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
+
   <script>
-    require([
-      "esri/WebMap",
+     require([
+      "esri/Map",
       "esri/views/MapView",
-      "esri/widgets/Legend",
       "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Legend, query) {
+    ], function(Map, MapView, query) {
 
-      var webmap = new WebMap({
-        portalItem: {
-          id: "773131c1992a453e870135fd485d7a60"
-        }
-      });
-
-      webmap.then(function(map){
-        query(".title")[0].innerHTML = " View - Events";
-      });
+      var map = new Map({ basemap: "dark-gray" });
 
       var view = new MapView({
         container: "viewDiv",
-        map: webmap,
+        map: map,
+        zoom: 2,
         padding: {top: 55}
       });
+      
+      // Define mobile size
 
       var mobileBreak = 544;
 
@@ -87,13 +83,13 @@
       msg1.innerHTML = "Size: " + JSON.stringify(view.size);
       msg2.innerHTML = "Resizing:";
 
-      // 1. Size Property
+      // 1. Watch size chagnes
       
       view.watch("size",function(size){
        msg1.innerHTML = "Size: " + JSON.stringify(size);
       });
       
-      // 2. Resizing property
+      // 2. Watch resizing changes
       
       view.watch("resizing", function(resizing){
         if (!resizing) {
@@ -105,6 +101,8 @@
           }          
         }
       });
+      
+      // Show/hide elements, add/remove padding
       
       function setTitleVisible(visible){
         if (visible) {
@@ -121,7 +119,7 @@
 </head>
 <body>
   <div class="header">
-    <div class="title"></div>
+    <div class="title">View - Events</div>
     <div class="message"></div>
     <div class="message2"></div>
   </div>

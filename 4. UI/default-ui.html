@@ -49,8 +49,10 @@
     }
   
   </style>
+
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
+  
   <script>
     require([
       "esri/WebMap",
@@ -67,10 +69,6 @@
         portalItem: {
           id: "773131c1992a453e870135fd485d7a60"
         }
-      });
-
-      webmap.then(function(map){
-        query(".title")[0].innerHTML = "UI - Default Containers";
       });
 
       var view = new MapView({
@@ -130,10 +128,11 @@
       
     });
   </script>
+  
 </head>
 <body>
   <div class="header">
-    <div class="title"></div>
+    <div class="title">UI - Default Containers</div>
   </div>
   <div id="viewDiv"></div>
 </body>

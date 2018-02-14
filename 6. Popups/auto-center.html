@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="description" content="App Design and CSS - Popup Auto Center">
+<meta name="description" content="App Design and CSS - Popup Auto-center">
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>App Design and CSS - Popup Auto Center</title>
+  <title>App Design and CSS - Popup Auto-center</title>
   <style>
     html, body, #viewDiv {
       padding: 0;
@@ -28,20 +28,12 @@
     .title {
       margin: 15px;
     }
-
-    /* Fix size */
-
-    /*.esri-view-width-small .esri-popup .esri-popup__main-container,*/
-    .esri-view-width-small .esri-popup .esri-popup__main-container,
-    .esri-view-width-medium .esri-popup .esri-popup__main-container,
-    .esri-view-width-large .esri-popup .esri-popup__main-container,
-    .esri-view-width-xlarge .esri-popup .esri-popup__main-container {
-      width: 400px;
-    }
     
   </style>
+
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
+  
   <script>
     require([
       "esri/WebMap",
@@ -56,29 +48,22 @@
         }
       });
 
-      webmap.then(function(map){
-        query(".title")[0].innerHTML = "Popups - Auto Center";
-      });
-
       var view = new MapView({
         container: "viewDiv",
         map: webmap,
         zoom: 10,
-        padding: {top: 55},
-        popup: { dockOptions: {
+        padding: {top: 55}
+      });
+
+      // Configure popup
+      view.popup = { 
+        dockOptions: {
           breakpoint: false  // prevent docking
-        }}
-      });
+        },
+        alignment: "top-center"
+      }
 
-      // Try to set auto-panning so popup comes back into view
-
-      view.when(()=>{
-        view.popup.autoPanEnabled = true; // No longer available at 4.7?
-        //view.popup.alignment = "top-center"; // Set this once or for everytime?
-        // view.popup.updateLocationEnabled = true; // Not sure what this does
-      });
-
-      // Hack: This force the popup back in the view, but centers everything, just want pan
+      // Auto-center view
 
       view.popup.watch("selectedFeature",(f)=>{
         if (f) {
@@ -88,23 +73,19 @@
           } else {
             pt = f.geometry.extent.center;
           }
-          // view.popup.location = pt;
-          // view.popup.alignment = "top-center";
-          // view.popup.viewModel.centerAtLocation(pt);
           view.goTo({
             target: pt
-          }).when(()=>{
-            view.popup.viewModel.centerAtLocation(pt);
           });
         }
       });
          
     });
   </script>
+
 </head>
 <body>
   <div class="header">
-    <div class="title"></div>
+    <div class="title">Popups - Auto-center</div>
   </div>
   <div id="viewDiv"></div>
 </body>
