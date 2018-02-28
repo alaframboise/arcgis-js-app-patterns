@@ -24,7 +24,7 @@
       background: #56a5d8;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -36,12 +36,12 @@
 
     .hidden {
       display: none;
-    } 
+    }
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -61,7 +61,7 @@
       var view = new MapView({
         container: "viewDiv",
         map: webmap,
-        padding: {top: 55}
+        padding: { top: 55 }
       });
 
       // Add custom button with calcite icon
@@ -84,13 +84,13 @@
 
       // Toggle legend
 
-      query(buttonWidget).on("click", ()=>{
+      query(buttonWidget).on("click", function() {
         query(legend.container).toggleClass("hidden");
       });
-      
+
     });
   </script>
-  
+
 </head>
 <body>
   <div class="header">

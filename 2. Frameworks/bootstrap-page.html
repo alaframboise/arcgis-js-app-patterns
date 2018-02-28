@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
-  
+
     <!-- Custom styles for this template -->
     <style>
 
@@ -107,7 +107,7 @@
       }
 
       .bg-green {
-        background-color: #338033; 
+        background-color: #338033;
       }
 
       .bg-purple {
@@ -258,10 +258,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
 
     <!-- ArcGIS JS -->
-    
+
     <script src="https://jsdev.arcgis.com/4.7/"></script>
     <script>
       require([
@@ -281,62 +281,62 @@
         }
 
         function removeViewsScroll() {
-          for (var i=0; i < views.length; i++) {
+          for (var i = 0; i < views.length; i++) {
             views[i].on("mouse-wheel", overrideMapZoom);
-          }  
+          }
         }
 
         function setViews(extent) {
           if (extent) {
-            for (var i=0; i < views.length; i++) {
-              views[i].goTo({target:extent});
-            }            
+            for (var i = 0; i < views.length; i++) {
+              views[i].goTo({ target: extent });
+            }
           }
         }
 
-        var defaultCenter = [-79.38544,43.64902];
+        var defaultCenter = [-79.38544, 43.64902];
         var defaultZoom = 12;
 
         var views = [];
 
         views.push(new MapView({
           container: "mapRotated1",
-          map: new Map({basemap: "dark-gray"}),
+          map: new Map({ basemap: "dark-gray" }),
           center: defaultCenter,
           zoom: defaultZoom
         }));
 
         views.push(new MapView({
           container: "mapRotated2",
-          map: new Map({basemap: "gray"}),
+          map: new Map({ basemap: "gray" }),
           center: defaultCenter,
           zoom: defaultZoom
         }));
 
         views.push(new MapView({
           container: "map1",
-          map: new Map({basemap: "streets"}),
+          map: new Map({ basemap: "streets" }),
           center: defaultCenter,
           zoom: defaultZoom
         }));
 
         views.push(new MapView({
           container: "map2",
-          map: new Map({basemap: "satellite"}),
+          map: new Map({ basemap: "satellite" }),
           center: defaultCenter,
           zoom: defaultZoom
         }));
 
         views.push(new MapView({
           container: "map3",
-          map: new Map({basemap: "streets-night-vector"}),
+          map: new Map({ basemap: "streets-night-vector" }),
           center: defaultCenter,
           zoom: defaultZoom
         }));
 
         views.push(new MapView({
           container: "map4",
-          map: new Map({basemap: "streets-navigation-vector"}),
+          map: new Map({ basemap: "streets-navigation-vector" }),
           center: defaultCenter,
           zoom: defaultZoom
         }));
@@ -348,14 +348,14 @@
           container: "search"
         });
 
-        search.watch("selectedResult", (result)=>{
-          if (result){
-            setViews(result.extent)  
+        search.watch("selectedResult", function(result) {
+          if (result) {
+            setViews(result.extent)
           }
         });
 
       });
     </script>
-  
+
   </body>
 </html>

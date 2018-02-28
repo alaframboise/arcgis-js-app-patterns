@@ -13,7 +13,7 @@
       width: 100%;
       font-family: "Avenir Next W00";
     }
-   
+
     .header {
       position: absolute;
       display: flex;
@@ -24,7 +24,7 @@
       background: #56a5d8;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -33,35 +33,35 @@
     .title {
       align-self: flex-start;
     }
-    
+
     .invisible {
       visibility: collapse;
     }
-    
+
     #coordsWidget {
       display: flex;
       justify-content: center;
       width: 180px;
-      min-height: 22px;      
+      min-height: 22px;
       padding: 5px 3px 3px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       font-family: "Avenir Next W00";
       font-size: 11px;
       color: #6e6e6e;
     }
-    
+
     .widget-center {
       bottom: 30px;
       left: 0;
       right: 0;
       margin: auto;
     }
-    
+
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -82,48 +82,50 @@
         container: "viewDiv",
         map: webmap,
         zoom: 10,
-        padding: {top: 55}
+        padding: { top: 55 }
       });
 
       var legend = new Legend({
         view: view
       });
-      view.ui.add(legend,"top-right");
-      
+      view.ui.add(legend, "top-right");
+
       // Custom Widget
 
       var coordsWidget = domConstruct.create("div", {
         id: "coordsWidget",
         class: "esri-widget esri-component widget-center" // esri CSS
       });
-      
+
       view.ui.add(coordsWidget, "manual");
       //view.ui.add(coordsWidget, "bottom-left");
 
       // Events
 
       var pt;
-      
+
       view.then(function() {
         pt = view.center;
-      })
-          
-      view.on("pointer-move", function(evt){
-        pt = view.toMap({x: evt.x, y: evt.y});
+      });
+
+      view.on("pointer-move", function(evt) {
+        pt = view.toMap({ x: evt.x, y: evt.y });
         setCoords(pt);
       });
 
-      view.watch(["stationary"], function(){
+      view.watch(["stationary"], function() {
         setCoords(pt);
       });
 
       function setCoords(pt) {
         if (pt) {
-          var coords = pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + " | " + view.zoom + " | 1:" + Math.round(view.scale *1)/1;
+          var coords = pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + " | " +
+                       view.zoom + " | " +
+                       "1:" + Math.round(view.scale * 1) / 1;
           coordsWidget.innerHTML = coords;
         }
       }
-      
+
     });
   </script>
 

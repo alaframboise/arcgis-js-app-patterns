@@ -24,7 +24,7 @@
       background: #464646;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -33,7 +33,7 @@
     .title {
       align-self: flex-start;
     }
-    
+
     .esri-ui-custom-container {
       position: absolute;
       top: 55px;
@@ -48,13 +48,13 @@
       margin: 15px;
       width: 235px;
     }
-    
-    
+
+
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -76,13 +76,13 @@
       var view = new MapView({
         container: "viewDiv",
         map: webmap,
-        padding: {top: 55, right: 250},
+        padding: { top: 55, right: 250 },
         zoom: 10,
-        ui: {components:[]} // Remove components
+        ui: { components: [] } // Remove components
       });
-      
+
       // Add Zoom to default ui container
-      
+
       view.ui.add(new Zoom({
         view: view
       }), "top-left");
@@ -96,8 +96,8 @@
 
       // Add the new ui container
 
-      domConstruct.place(customUI, query(".esri-view .esri-view-root")[0]);   
-    
+      domConstruct.place(customUI, query(".esri-view .esri-view-root")[0]);
+
       // Add legend to custom ui
 
       addWidget(new Legend({
@@ -112,11 +112,11 @@
 
       function addWidget(widget) {
         var customUIContainer = customUI.childNodes[0];
-        var node = document.createElement("div");        
+        var node = document.createElement("div");
         customUIContainer.appendChild(node);
         widget.container = node;
       }
-    
+
     });
   </script>
 

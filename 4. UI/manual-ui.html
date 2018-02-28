@@ -13,7 +13,7 @@
       width: 100%;
       font-family: "Avenir Next W00";
     }
-    
+
     .header {
       position: absolute;
       display: flex;
@@ -24,7 +24,7 @@
       background: #464646;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -33,25 +33,25 @@
     .title {
       align-self: flex-start;
     }
-       
+
     .border {
       border: 2px #333 dotted;
     }
-    
+
     .widget--bottom-center {
       display: flex;
       justify-content: center;
       bottom: 0;
       left: 0;
-      right: 0; 
+      right: 0;
       margin: 15px;
     }
-    
+
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -74,9 +74,10 @@
         container: "viewDiv",
         map: webmap,
         zoom: 10,
-        padding: {top: 54},
-        ui: {components: 
-          ["zoom","compass","attribution"] // Define on create
+        padding: { top: 54 },
+        ui: {
+          // Define on create
+          components: ["zoom", "compass", "attribution"]
         }
       });
 
@@ -85,38 +86,38 @@
       var home = new Home({
         view: view
       });
-      view.ui.add(home,"top-left", 0);
+      view.ui.add(home, "top-left", 0);
 
       var legend = new Legend({
         view: view
       });
-      view.ui.add(legend,"top-right");
+      view.ui.add(legend, "top-right");
 
       var basemapToggle = new BasemapToggle({
         view: view,
         nextBasemap: "satellite"
       });
-      view.ui.add(basemapToggle,"bottom-right");
-      
+      view.ui.add(basemapToggle, "bottom-right");
+
       // Add to manual UI container
 
       var scalebar = new Scalebar({
         view: view
       });
-      
+
       view.ui.add({
         component: scalebar,
         position: "manual"
       });
-      
+
       query(scalebar.domNode).addClass("widget--bottom-center");
-      
+
       // Border
 
-      view.then(function(){
+      view.then(function() {
         query(".esri-ui-manual-container").addClass("border");
       });
-      
+
     });
   </script>
 

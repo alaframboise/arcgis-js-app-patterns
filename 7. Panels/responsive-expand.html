@@ -24,7 +24,7 @@
       background: #338033;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -33,25 +33,25 @@
     .title {
       align-self: flex-start;
     }
-    
+
     .invisible {
       visibility: collapse;
     }
-    
+
     .esri-expand .esri-expand__content {
       box-shadow: none;
     }
-    
+
     .esri-view-height-xsmall .esri-ui-corner .esri-expand .esri-legend.esri-widget,
     .esri-view-height-small .esri-ui-corner .esri-expand .esri-legend.esri-widget {
       max-height: 100%;
-    } 
+    }
 
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -71,18 +71,18 @@
       var view = new MapView({
         container: "viewDiv",
         map: webmap,
-        padding: {top: 55}
+        padding: { top: 55 }
       });
 
       // Desktop
-      
+
       var legend = new Legend({
         view: view,
         container: document.createElement("div")
       });
 
       // Mobile
-      
+
       var expandLegend = new Expand({
         view: view,
         content: new Legend({
@@ -90,57 +90,60 @@
           container: document.createElement("div")
         })
       });
-     
+
       // Load
-      
+
       if (view.widthBreakpoint === "xsmall") {
         setViewResponsive(true);
-      } else {
+      }
+      else {
         setViewResponsive(false);
       }
-      
+
       // Breakpoints
-      
-      view.watch("widthBreakpoint",function(breakpoint){
+
+      view.watch("widthBreakpoint", function(breakpoint) {
         switch (breakpoint) {
-            case "xsmall":
-              setViewResponsive(true);
-              break;
-            case "small":
-            case "medium":
-            case "large":
-            case "xlarge":
-              setViewResponsive(false);
-              break;
+          case "xsmall":
+            setViewResponsive(true);
+            break;
+          case "small":
+          case "medium":
+          case "large":
+          case "xlarge":
+            setViewResponsive(false);
+            break;
           default:
         }
       });
-      
-      function setViewResponsive(isMobile){
+
+      function setViewResponsive(isMobile) {
         setTitleMobile(isMobile);
         setLegendMobile(isMobile);
       }
-      
-      function setTitleMobile(isMobile){
+
+      function setTitleMobile(isMobile) {
         if (isMobile) {
-         query(".header").addClass("invisible");
-         view.padding = {top:0}
-        } else {
-         query(".header").removeClass("invisible");
-         view.padding = {top:55}
+          query(".header").addClass("invisible");
+          view.padding = { top: 0 }
+        }
+        else {
+          query(".header").removeClass("invisible");
+          view.padding = { top: 55 }
         }
       }
-      
+
       function setLegendMobile(isMobile) {
         if (isMobile) {
           view.ui.remove(legend);
           view.ui.add(expandLegend, "top-right");
-        } else {
+        }
+        else {
           view.ui.remove(expandLegend);
           view.ui.add(legend, "top-right");
         }
       }
-      
+
     });
   </script>
 </head>

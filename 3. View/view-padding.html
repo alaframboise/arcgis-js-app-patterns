@@ -13,7 +13,7 @@
       width: 100%;
       font-family: "Avenir Next W00";
     }
-    
+
     .header {
       position: absolute;
       display: flex;
@@ -25,7 +25,7 @@
       background: #ab3c16;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -43,20 +43,20 @@
       text-align: right;
     }
 
-    #viewDiv {  
+    #viewDiv {
       /* 1. Padding */
       width: 100%;
       height: 100%;
       /* 2. Non-padding approach */
      /* height: calc(100% - 55px);
       margin-top: 55px;*/
-    }   
+    }
 
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/Map",
@@ -71,11 +71,11 @@
         container: "viewDiv",
         map: map,
         zoom: 3,
-        padding: {top: 55}
+        padding: { top: 55 }
       });
-      
+
       query(".message")[0].innerHTML = JSON.stringify(view.padding);
-       
+
     });
   </script>
 

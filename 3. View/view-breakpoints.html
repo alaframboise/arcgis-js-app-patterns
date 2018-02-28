@@ -24,7 +24,7 @@
       background: #ab3c16;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1 auto;
       margin: 15px;
@@ -66,53 +66,56 @@
         container: "viewDiv",
         map: map,
         zoom: 3,
-        padding: {top: 55}
+        padding: { top: 55 }
       });
-      
+
       // Set custom breakpoints
-      
+
       view.breakpoints = {
         xsmall: 400, // 544
         small: 780,
         medium: 1024,
         large: 1200
-      }
-      
-      var msg = query(".message")[0];      
+      };
+
+      var msg = query(".message")[0];
       msg.innerHTML = JSON.stringify(view.breakpoints);
 
       setTitleVisible(view.widthBreakpoint !== "xsmall");
-      
+
       // Breakpoint Events
-      
-      view.watch(["widthBreakpoint","heightBreakpoint"],function(breakVal){
-        msg.innerHTML = "Width: " + view.widthBreakpoint + " [" + view.breakpoints[view.widthBreakpoint] + "], Height: " + view.heightBreakpoint + " [" + view.breakpoints[view.heightBreakpoint] +"]";
+
+      view.watch(["widthBreakpoint", "heightBreakpoint"], function(breakVal) {
+        msg.innerHTML = "Width: " + view.widthBreakpoint + " [" + view.breakpoints[view.widthBreakpoint] + "], " +
+                        "Height: " + view.heightBreakpoint + " [" + view.breakpoints[view.heightBreakpoint] + "]";
+
         switch (breakVal) {
-            case "xsmall":
-              setTitleVisible(false);
-              break;
-            case "small":
-            case "medium":
-            case "large":
-            case "xlarge":
-              setTitleVisible(true);
-              break;
+          case "xsmall":
+            setTitleVisible(false);
+            break;
+          case "small":
+          case "medium":
+          case "large":
+          case "xlarge":
+            setTitleVisible(true);
+            break;
           default:
         }
       });
 
       // Show/hide elements, add/remove padding
-      
-      function setTitleVisible(visible){
+
+      function setTitleVisible(visible) {
         if (visible) {
-         query(".header").removeClass("invisible");
-         view.padding = {top:55}
-        } else {
-         query(".header").addClass("invisible");
-         view.padding = {top:0}
+          query(".header").removeClass("invisible");
+          view.padding = { top: 55 }
+        }
+        else {
+          query(".header").addClass("invisible");
+          view.padding = { top: 0 }
         }
       }
-      
+
     });
   </script>
 

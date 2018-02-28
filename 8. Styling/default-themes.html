@@ -13,7 +13,7 @@
       width: 100%;
       font-family: "Avenir Next W00";
     }
-    
+
     .header {
       position: absolute;
       display: flex;
@@ -24,7 +24,7 @@
       background: #d17e21;
       font-size: 20px;
     }
-    
+
     .title, .theme-select {
       flex: 1 1;
       margin: 15px;
@@ -45,7 +45,7 @@
 
   <link id="esriCssLink" rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -68,36 +68,37 @@
         container: "viewDiv",
         map: webmap,
         zoom: 10,
-        padding: {top: 55},
-        ui: {components: 
-          ["zoom","compass","attribution"] // Define on create
+        padding: { top: 55 },
+        ui: {
+          // Define on create
+          components: ["zoom", "compass", "attribution"]
         }
       });
 
       var legend = new Legend({
         view: view
       });
-      view.ui.add(legend,"top-right");
+      view.ui.add(legend, "top-right");
 
       var basemapToggle = new BasemapToggle({
         view: view,
         nextBasemap: "satellite"
       });
-      view.ui.add(basemapToggle,"bottom-right");
-      
+      view.ui.add(basemapToggle, "bottom-right");
+
       var scalebar = new Scalebar({
         view: view
       });
-      view.ui.add(scalebar,"bottom-left");
+      view.ui.add(scalebar, "bottom-left");
 
       // Change theme
 
-      query("#theme").on("change", function(e){
-      	var theme = e.target.options[e.target.selectedIndex].value;
-      	var link = query("#esriCssLink")[0];
+      query("#theme").on("change", function(e) {
+        var theme = e.target.options[e.target.selectedIndex].value;
+        var link = query("#esriCssLink")[0];
         link.setAttribute("href", "https://jsdev.arcgis.com/4.7/esri/themes/" + theme + "/main.css");
       });
-      
+
     });
   </script>
 </head>

@@ -24,7 +24,7 @@
       background: #464646;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -33,26 +33,26 @@
     .title {
       align-self: flex-start;
     }
-    
+
     .esri-widgets {
       opacity: 1;
       transition: opacity 0.5s linear;
     }
-    
+
     .invisible {
       visibility: collapse;
     }
-    
+
     .border {
       min-width: 250px;
       border: 2px #333 dotted;
     }
-  
+
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -75,9 +75,10 @@
         container: "viewDiv",
         map: webmap,
         zoom: 10,
-        padding: {top: 55},
+        padding: { top: 55 },
         ui: {
-          components: ["zoom","compass","attribution"], // Define on create
+          // Define on create
+          components: ["zoom", "compass", "attribution"],
           //padding: {top: 30, right: 30, bottom: 45, left: 30}
         }
       });
@@ -87,48 +88,49 @@
       var home = new Home({
         view: view
       });
-      view.ui.add(home,"top-left", 0);
+      view.ui.add(home, "top-left", 0);
 
       var legend = new Legend({
         view: view
       });
-      view.ui.add(legend,"top-right");
+      view.ui.add(legend, "top-right");
 
       var basemapToggle = new BasemapToggle({
         view: view,
         nextBasemap: "satellite"
       });
-      view.ui.add(basemapToggle,"bottom-right");
-      
+      view.ui.add(basemapToggle, "bottom-right");
+
       var scalebar = new Scalebar({
         view: view
       });
-      view.ui.add(scalebar,"bottom-left");
+      view.ui.add(scalebar, "bottom-left");
 
       // Make widgets visible/invisible
 
-      view.then(function(){
+      view.then(function() {
         query(".esri-ui-corner").addClass("esri-component border");
-        query(".esri-ui-corner").on("click", function(e){
+        query(".esri-ui-corner").on("click", function(e) {
           if (e.target.className.indexOf("esri-ui-corner") > -1) {
-            query(e.target).query(".esri-widget").toggleClass("invisible"); 
+            query(e.target).query(".esri-widget").toggleClass("invisible");
           }
-        });        
+        });
       });
-      
+
       // Sync with breakpoints
-      
-      view.watch("widthBreakpoint", function(breakpoint){
+
+      view.watch("widthBreakpoint", function(breakpoint) {
         if (breakpoint === "xsmall") {
-          query(".esri-ui-corner .esri-widget").addClass("invisible"); 
-        } else {
-          query(".esri-ui-corner .esri-widget").removeClass("invisible"); 
+          query(".esri-ui-corner .esri-widget").addClass("invisible");
+        }
+        else {
+          query(".esri-ui-corner .esri-widget").removeClass("invisible");
         }
       });
-      
+
     });
   </script>
-  
+
 </head>
 <body>
   <div class="header">

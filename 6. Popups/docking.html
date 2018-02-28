@@ -24,7 +24,7 @@
       background: #8c5e2a;
       font-size: 20px;
     }
-    
+
     .title, .message {
       flex: 1 1;
       margin: 15px;
@@ -37,12 +37,12 @@
     .invisible {
       visibility: collapse;
     }
-    
+
   </style>
 
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
-  
+
   <script>
     require([
       "esri/WebMap",
@@ -62,14 +62,14 @@
         container: "viewDiv",
         map: webmap,
         zoom: 10,
-        padding: {top: 55}
+        padding: { top: 55 }
       });
 
       // Legend
       var legend = new Legend({
         view: view
       });
-      
+
       view.ui.add(legend, "top-right");
 
       // Configure Popup
@@ -77,7 +77,7 @@
       var popup = view.popup;
 
       popup.dockEnabled = false; // Force docked or floating (if visible)
-      
+
       popup.dockOptions = {
         breakpoint: false, // Disable auto docking
         /* breakpoint: {
@@ -87,46 +87,47 @@
          /*position: function(){
            if (view.widthBreakpoint === "xsmall") {
              return "bottom-center";
-           } else {
+           }
+           else {
              //popup.dockEnabled = true;
              return "top-right";
            }
-         }, 
+         },
          */
-         
+
         //buttonEnabled: false
-      }  
+      }
 
       // Manually control docking and location
 
       /*
-
-      view.watch("widthBreakpoint", function(breakpoint){
+      view.watch("widthBreakpoint", function(breakpoint) {
         var popup = view.popup;
         if (breakpoint === "xsmall") {
           popup.dockOptions = {
             position: "top-center"
           }
-        } else {
+        }
+        else {
           popup.dockOptions = {
             position: "bottom-center"
           }
         }
         popup.dockEnabled = true; // dock
       });
-
       */
 
       // Sync legend with popup
 
-      popup.watch(["dockEnabled","visible"], (val)=>{
+      popup.watch(["dockEnabled", "visible"], function(val) {
         if (view.popup.dockEnabled && view.popup.visible) {
           query(legend.container).addClass("invisible");
-        } else {
+        }
+        else {
           query(legend.container).removeClass("invisible");
         }
       });
-         
+
     });
   </script>
 

@@ -24,7 +24,7 @@
       background: #d17e21;
       font-size: 20px;
     }
-    
+
     .title {
       flex: 1 1;
       margin: 15px;
@@ -69,9 +69,9 @@
     .theme .esri-button:hover {
       color: #fff;
     }
-    
+
     /* Zoom - Safer to resize individual buttons */
-    
+
     .theme .esri-zoom .esri-widget-button,
     .theme .esri-home.esri-widget-button {
       width: 28px;
@@ -83,7 +83,7 @@
     .theme .esri-home.esri-widget-button .esri-icon {
       font-size: 13px;
     }
-        
+
     /* Basemap Toggle - Little smaller */
 
     .theme .esri-basemap-toggle__container,
@@ -93,42 +93,42 @@
     }
 
     /* Legend - Little wider */
-    
+
     .theme .esri-legend {
       width: 250px;
     }
-   
+
     /* Scalebar - Lower position */
-    
+
     .theme .esri-scale-bar {
       margin-bottom: -15px;
     }
 
     /* Attribution - Do not override */
-    
+
     .theme .esri-attribution,
     .theme .esri-attribution a {
       background: rgba(255,255,255,0.65);
       color: #323232;
     }
-    
+
     /* Search - Do not override */
- 
+
     .theme .esri-widget.esri-search,
     .theme .esri-search .esri-widget-button {
       background-color: #f8f8f8;
       color: #696969;
     }
-    
+
     .theme .esri-search .esri-widget-button {
       width: 28px;
       height: 28px;
     }
-    
+
     .theme .esri-search .esri-widget-button,
     .theme .esri-search .esri-search__input {
       font-size: 12px;
-    } 
+    }
 
     .theme .esri-widget .esri-menu {
       font-size: 12px;
@@ -164,12 +164,12 @@
           id: "773131c1992a453e870135fd485d7a60"
         }
       });
-      
+
       var view = new MapView({
         container: "viewDiv",
         map: webmap,
         zoom: 10,
-        padding: {top: 55, right: 200}
+        padding: { top: 55, right: 200 }
       });
 
       // Widgets
@@ -178,7 +178,7 @@
         view: view
       });
       view.ui.add(home, "top-left");
-      
+
       var search = new Search({
         view: view,
         container: "search"
@@ -187,18 +187,18 @@
       var scalebar = new Scalebar({
         view: view
       });
-      view.ui.add(scalebar,"bottom-left");
+      view.ui.add(scalebar, "bottom-left");
 
       var legend = new Legend({
         view: view
-      }); 
-      view.ui.add(legend, "top-right");   
+      });
+      view.ui.add(legend, "top-right");
 
       var toggle = new BasemapToggle({
         view: view
       });
-      view.ui.add(toggle,"bottom-right");
-   
+      view.ui.add(toggle, "bottom-right");
+
     });
   </script>
 

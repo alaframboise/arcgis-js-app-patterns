@@ -24,7 +24,7 @@
       background: #ab3c16;
       font-size: 20px;
     }
-    
+
     .title, .message, .message2 {
       flex: 1 1 auto;
       margin: 15px;
@@ -54,12 +54,12 @@
     }
 
   </style>
-  
+
   <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
   <script src="https://jsdev.arcgis.com/4.7/"></script>
 
   <script>
-     require([
+    require([
       "esri/Map",
       "esri/views/MapView",
       "dojo/query",
@@ -72,9 +72,9 @@
         container: "viewDiv",
         map: map,
         zoom: 3,
-        padding: {top: 55}
+        padding: { top: 55 }
       });
-      
+
       // Define mobile size
 
       var mobileBreak = 544;
@@ -83,40 +83,43 @@
 
       var msg1 = query(".message")[0];
       var msg2 = query(".message2")[0];
+
       msg1.innerHTML = "Size: " + JSON.stringify(view.size);
       msg2.innerHTML = "Resizing:";
 
       // 1. Watch size chagnes
-      
-      view.watch("size",function(size){
-       msg1.innerHTML = "Size: " + JSON.stringify(size);
+
+      view.watch("size", function(size) {
+        msg1.innerHTML = "Size: " + JSON.stringify(size);
       });
-      
+
       // 2. Watch resizing changes
-      
-      view.watch("resizing", function(resizing){
+
+      view.watch("resizing", function(resizing) {
         if (!resizing) {
           msg2.innerHTML = "Resizing: " + view.width;
           if (view.width > mobileBreak) {
             setTitleVisible(true);
-          } else {
+          }
+          else {
             setTitleVisible(false);
-          }          
+          }
         }
       });
-      
+
       // Show/hide elements, add/remove padding
-      
-      function setTitleVisible(visible){
+
+      function setTitleVisible(visible) {
         if (visible) {
-         query(".header").removeClass("invisible");
-         view.padding = {top:55}
-        } else {
-         query(".header").addClass("invisible");
-         view.padding = {top:0}
+          query(".header").removeClass("invisible");
+          view.padding = { top: 55 }
+        }
+        else {
+          query(".header").addClass("invisible");
+          view.padding = { top: 0 }
         }
       }
-      
+
     });
   </script>
 </head>
