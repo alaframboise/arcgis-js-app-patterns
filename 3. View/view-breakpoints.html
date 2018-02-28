@@ -28,6 +28,9 @@
     .title, .message {
       flex: 1 1 auto;
       margin: 15px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .title {
@@ -62,7 +65,7 @@
       var view = new MapView({
         container: "viewDiv",
         map: map,
-        zoom: 2,
+        zoom: 3,
         padding: {top: 55}
       });
       

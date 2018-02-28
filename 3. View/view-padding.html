@@ -17,6 +17,7 @@
     .header {
       position: absolute;
       display: flex;
+      top: 0;
       width: 100%;
       height: 55px;
       z-index: 1;
@@ -28,6 +29,9 @@
     .title, .message {
       flex: 1 1;
       margin: 15px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .title {
@@ -44,7 +48,7 @@
       width: 100%;
       height: 100%;
       /* 2. Non-padding approach */
-    /*  height: calc(100% - 55px);
+     /* height: calc(100% - 55px);
       margin-top: 55px;*/
     }   
 
@@ -66,7 +70,7 @@
       var view = new MapView({
         container: "viewDiv",
         map: map,
-        zoom: 2,
+        zoom: 3,
         padding: {top: 55}
       });
       
