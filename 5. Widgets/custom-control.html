@@ -67,10 +67,8 @@
       "esri/WebMap",
       "esri/views/MapView",
       "esri/widgets/Legend",
-      "dojo/query",
-      "dojo/dom-construct",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Legend, query, domConstruct) {
+    ], function(WebMap, MapView, Legend) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -92,10 +90,9 @@
 
       // Custom Widget
 
-      var coordsWidget = domConstruct.create("div", {
-        id: "coordsWidget",
-        class: "esri-widget esri-component widget-center" // esri CSS
-      });
+      var coordsWidget = document.createElement("div");
+      coordsWidget.id = "coordsWidget";
+      coordsWidget.className = "esri-widget esri-component widget-center";
 
       view.ui.add(coordsWidget, "manual");
       //view.ui.add(coordsWidget, "bottom-left");
@@ -118,12 +115,13 @@
       });
 
       function setCoords(pt) {
-        if (pt) {
-          var coords = pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + " | " +
-                       view.zoom + " | " +
-                       "1:" + Math.round(view.scale * 1) / 1;
-          coordsWidget.innerHTML = coords;
+        if (!pt) {
+          return;
         }
+
+        coordsWidget.innerHTML = pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + " | " +
+                                 view.zoom + " | " +
+                                 "1:" + Math.round(view.scale * 1) / 1;
       }
 
     });
@@ -135,4 +133,5 @@
     <div class="title">Widgets - Custom Control</div>
   </div>
   <div id="viewDiv"></div>
+</body>
 </html>
