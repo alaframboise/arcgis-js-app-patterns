@@ -49,8 +49,8 @@
 
   </style>
 
-  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
-  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.7/"></script>
 
   <script>
     require([
@@ -79,15 +79,14 @@
       };
 
       var msg = query(".message")[0];
-      msg.innerHTML = JSON.stringify(view.breakpoints);
+      msg.innerHTML = getCurrentBreakpointValues();
 
       setTitleVisible(view.widthBreakpoint !== "xsmall");
 
       // Breakpoint Events
 
       view.watch(["widthBreakpoint", "heightBreakpoint"], function(breakVal) {
-        msg.innerHTML = "Width: " + view.widthBreakpoint + " [" + view.breakpoints[view.widthBreakpoint] + "], " +
-                        "Height: " + view.heightBreakpoint + " [" + view.breakpoints[view.heightBreakpoint] + "]";
+        msg.innerHTML = getCurrentBreakpointValues();
 
         switch (breakVal) {
           case "xsmall":
@@ -116,6 +115,16 @@
         }
       }
 
+      // Get breakpoints message
+
+      function getCurrentBreakpointValues() {
+        var widthBreakpointValue = view.breakpoints[view.widthBreakpoint] || "+1200";
+        var heightBreakpointValue = view.breakpoints[view.heightBreakpoint] || "+1200";
+
+        return "Width: " + view.widthBreakpoint + " [" + widthBreakpointValue + "], " +
+               "Height: " + view.heightBreakpoint + " [" + heightBreakpointValue + "]";
+      }
+
     });
   </script>
 
@@ -126,4 +135,5 @@
     <div class="message"></div>
   </div>
   <div id="viewDiv"></div>
+</body>
 </html>

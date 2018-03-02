@@ -43,8 +43,8 @@
 
   </style>
 
-  <link id="esriCssLink" rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
-  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <link id="esriCssLink" rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.7/"></script>
 
   <script>
     require([
@@ -54,9 +54,8 @@
       "esri/widgets/Legend",
       "esri/widgets/BasemapToggle",
       "esri/widgets/ScaleBar",
-      "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Home, Legend, BasemapToggle, Scalebar, query) {
+    ], function(WebMap, MapView, Home, Legend, BasemapToggle, Scalebar) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -93,10 +92,12 @@
 
       // Change theme
 
-      query("#theme").on("change", function(e) {
+      var themeChooser = document.getElementById("theme");
+      var cssLink = document.getElementById("esriCssLink");
+
+      themeChooser.addEventListener("change", function(e) {
         var theme = e.target.options[e.target.selectedIndex].value;
-        var link = query("#esriCssLink")[0];
-        link.setAttribute("href", "https://jsdev.arcgis.com/4.7/esri/themes/" + theme + "/main.css");
+        cssLink.setAttribute("href", "https://js.arcgis.com/4.7/esri/themes/" + theme + "/main.css");
       });
 
     });

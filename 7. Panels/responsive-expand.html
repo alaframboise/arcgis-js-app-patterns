@@ -49,18 +49,18 @@
 
   </style>
 
-  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
-  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.7/"></script>
 
   <script>
     require([
       "esri/WebMap",
+      "esri/core/watchUtils",
       "esri/views/MapView",
       "esri/widgets/Legend",
       "esri/widgets/Expand",
-      "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Legend, Expand, query) {
+    ], function(WebMap, watchUtils, MapView, Legend, Expand) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -91,18 +91,9 @@
         })
       });
 
-      // Load
-
-      if (view.widthBreakpoint === "xsmall") {
-        setViewResponsive(true);
-      }
-      else {
-        setViewResponsive(false);
-      }
-
       // Breakpoints
 
-      view.watch("widthBreakpoint", function(breakpoint) {
+      watchUtils.init(view, "widthBreakpoint", function(breakpoint) {
         switch (breakpoint) {
           case "xsmall":
             setViewResponsive(true);
@@ -123,25 +114,24 @@
       }
 
       function setTitleMobile(isMobile) {
+        var header = document.getElementsByClassName("header")[0];
+
         if (isMobile) {
-          query(".header").addClass("invisible");
-          view.padding = { top: 0 }
+          header.classList.add("invisible");
+          view.padding = { top: 0 };
         }
         else {
-          query(".header").removeClass("invisible");
-          view.padding = { top: 55 }
+          header.classList.remove("invisible");
+          view.padding = { top: 55 };
         }
       }
 
       function setLegendMobile(isMobile) {
-        if (isMobile) {
-          view.ui.remove(legend);
-          view.ui.add(expandLegend, "top-right");
-        }
-        else {
-          view.ui.remove(expandLegend);
-          view.ui.add(legend, "top-right");
-        }
+        var toRemove = isMobile ? legend : expandLegend;
+        var toAdd = isMobile ? expandLegend : legend;
+
+        view.ui.remove(toRemove);
+        view.ui.add(toAdd, "top-right");
       }
 
     });

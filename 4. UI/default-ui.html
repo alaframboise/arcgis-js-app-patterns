@@ -50,8 +50,8 @@
 
   </style>
 
-  <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
-  <script src="https://jsdev.arcgis.com/4.7/"></script>
+  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.7/"></script>
 
   <script>
     require([
@@ -109,23 +109,20 @@
       // Make widgets visible/invisible
 
       view.then(function() {
-        query(".esri-ui-corner").addClass("esri-component border");
-        query(".esri-ui-corner").on("click", function(e) {
-          if (e.target.className.indexOf("esri-ui-corner") > -1) {
-            query(e.target).query(".esri-widget").toggleClass("invisible");
-          }
-        });
+        query(".esri-ui-corner")
+          .addClass("esri-component border")
+          .on("click", function(e) {
+            if (e.currentTarget.classList.contains("esri-ui-corner")) {
+              query(".esri-widget", e.target).toggleClass("invisible");
+            }
+          });
       });
 
       // Sync with breakpoints
 
       view.watch("widthBreakpoint", function(breakpoint) {
-        if (breakpoint === "xsmall") {
-          query(".esri-ui-corner .esri-widget").addClass("invisible");
-        }
-        else {
-          query(".esri-ui-corner .esri-widget").removeClass("invisible");
-        }
+        query(".esri-ui-corner .esri-widget")
+          .toggleClass("invisible", breakpoint === "xsmall");
       });
 
     });
