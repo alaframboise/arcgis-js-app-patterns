@@ -38,6 +38,13 @@
       visibility: collapse;
     }
 
+    .position-select, .breakpoint-select {
+      flex-shrink: 2;
+      align-self: right;
+      max-width: 100px;
+      margin: 17px;
+    }
+
   </style>
 
   <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
@@ -77,13 +84,16 @@
 
       popup.dockEnabled = false; // Force docked or floating (if visible)
 
+      // 1. Manually control docking and location
+
+      /*
       popup.dockOptions = {
         breakpoint: false, // Disable auto docking
-        /* breakpoint: {
+        breakpoint: {
            width: 768
-         }*/
+         }
         // Manually control docking and location
-        /*position: function() {
+        position: function() {
           if (view.widthBreakpoint === "xsmall") {
             return "bottom-center";
           }
@@ -92,12 +102,11 @@
             return "top-right";
           }
         },
-        */
-
         //buttonEnabled: false
       };
+      */
 
-      // Manually control docking and location
+      // 2. Manually control docking and location
 
       /*
       view.watch("widthBreakpoint", function(breakpoint) {
@@ -115,11 +124,37 @@
       // Sync legend with popup
 
       popup.watch(["dockEnabled", "visible"], function() {
-        if (view.popup.dockEnabled && view.popup.visible) {
+        var positionCollision = view.popup.dockOptions.position === "top-right" || view.popup.dockOptions.position === "auto";
+        if (view.popup.dockEnabled && positionCollision && view.popup.visible) {
           legend.container.classList.add("invisible");
         }
         else {
           legend.container.classList.remove("invisible");
+        }
+      });
+
+      // Docking position
+
+      var positionChooser = document.getElementById("position");
+
+      positionChooser.addEventListener("change", function(e) {
+        var position = e.target.options[e.target.selectedIndex].value;
+        popup.dockOptions.position = position;
+        popup.dockEnabled = true;
+      });
+
+      // Dock or not
+
+      var breakChooser = document.getElementById("breakpoint");
+
+      breakChooser.addEventListener("change", function(e) {
+        var breakpoint = e.target.options[e.target.selectedIndex].value;
+        if (breakpoint == "true") {
+          popup.dockOptions.breakpoint = true;
+        } else if (breakpoint == "false") {
+          popup.dockOptions.breakpoint = false;
+        } else {
+          popup.dockOptions.breakpoint = { width: parseInt(breakpoint) };
         }
       });
 
@@ -130,6 +165,22 @@
 <body>
   <div class="header">
     <div class="title">Popups - Docking</div>
+    <select name="position" id="position" class="position-select">
+      <option value="auto">auto</option>
+      <option value="top-left">top-left</option>
+      <option value="top-center">top-center</option>
+      <option value="top-right">top-right</option>
+      <option value="bottom-right">bottom-right</option>
+      <option value="bottom-center">bottom-center</option>
+      <option value="bottom-left">bottom-left</option>
+    </select>
+    <select name="breakpoint" id="breakpoint" class="breakpoint-select">
+      <option value="true">true</option>
+      <option value="false">false</option>
+      <option value="400">400px</option>
+      <option value="544">544px</option>
+      <option value="768">768px</option>
+    </select>
   </div>
   <div id="viewDiv"></div>
 </body>
