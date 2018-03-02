@@ -38,9 +38,8 @@
     require([
       "esri/WebMap",
       "esri/views/MapView",
-      "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, query) {
+    ], function(WebMap, MapView) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -65,17 +64,11 @@
 
       // Auto-center view
 
-      view.popup.watch("selectedFeature", function(f) {
-        if (f) {
-          var pt;
-          if (f.geometry.type === "point") {
-            pt = f.geometry;
-          }
-          else {
-            pt = f.geometry.extent.center;
-          }
+      view.popup.watch("selectedFeature", function(feature) {
+        if (feature) {
           view.goTo({
-            target: pt
+            target: feature,
+            scale: view.scale
           });
         }
       });
