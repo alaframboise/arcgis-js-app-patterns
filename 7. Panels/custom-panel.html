@@ -57,10 +57,8 @@
       "esri/WebMap",
       "esri/views/MapView",
       "esri/widgets/Legend",
-      "dojo/query",
-      "dojo/dom-construct",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Legend, query, domConstruct) {
+    ], function(WebMap, MapView, Legend) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -82,7 +80,7 @@
 
       // Panel
 
-      var panel = query("#panel")[0];
+      var panel = document.getElementById("panel");
       var legend = new Legend({
         view: view,
         container: panel
@@ -90,25 +88,25 @@
 
       // Custom Button (Widget)
 
-      var buttonWidget = domConstruct.create("div", {
-        id: "buttonWidget",
-        class: "esri-widget esri-component esri-widget-button esri-interactive",
-        innerHTML: "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>"
-      });
+      var buttonWidget = document.createElement("div");
+      buttonWidget.id = "buttonWidget";
+      buttonWidget.className = "esri-widget esri-component esri-widget-button esri-interactive";
+      buttonWidget.innerHTML = "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>";
 
       view.ui.add(buttonWidget, "top-right");
 
       // Events
 
-      query(buttonWidget).on("click", function(e) {
-        var expanded = dojo.hasClass(panel, "panel-expanded");
-        if (!expanded) {
-          view.padding = paddingExpanded;
-          query(panel).addClass("panel-expanded");
+      buttonWidget.addEventListener("click", function() {
+        var expanded = panel.classList.contains("panel-expanded");
+
+        if (expanded) {
+          view.padding = padding;
+          panel.classList.remove("panel-expanded");
         }
         else {
-          view.padding = padding;
-          query(panel).removeClass("panel-expanded");
+          view.padding = paddingExpanded;
+          panel.classList.add("panel-expanded");
         }
       });
 
