@@ -2,7 +2,7 @@
 
 Examples of how to accomplish simple app designs and styling with the ArcGIS JS API v4.
 
-<a href="https://alaframboise.github.io/arcgis-js-app-design-css-styling/">See the examples</a>
+<a href="https://alaframboise.github.io/arcgis-js-app-patterns/">See the examples</a>
 
 ## Licensing
 Copyright 2018 Esri
