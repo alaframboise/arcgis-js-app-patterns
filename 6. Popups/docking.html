@@ -48,9 +48,8 @@
       "esri/WebMap",
       "esri/views/MapView",
       "esri/widgets/Legend",
-      "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Legend, query) {
+    ], function(WebMap, MapView, Legend) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -83,20 +82,20 @@
         /* breakpoint: {
            width: 768
          }*/
-         // Manually control docking and location
-         /*position: function(){
-           if (view.widthBreakpoint === "xsmall") {
-             return "bottom-center";
-           }
-           else {
-             //popup.dockEnabled = true;
-             return "top-right";
-           }
-         },
-         */
+        // Manually control docking and location
+        /*position: function(){
+          if (view.widthBreakpoint === "xsmall") {
+            return "bottom-center";
+          }
+          else {
+            //popup.dockEnabled = true;
+            return "top-right";
+          }
+        },
+        */
 
         //buttonEnabled: false
-      }
+      };
 
       // Manually control docking and location
 
@@ -119,12 +118,12 @@
 
       // Sync legend with popup
 
-      popup.watch(["dockEnabled", "visible"], function(val) {
+      popup.watch(["dockEnabled", "visible"], function() {
         if (view.popup.dockEnabled && view.popup.visible) {
-          query(legend.container).addClass("invisible");
+          legend.container.classList.add("invisible");
         }
         else {
-          query(legend.container).removeClass("invisible");
+          legend.container.classList.remove("invisible");
         }
       });
 
