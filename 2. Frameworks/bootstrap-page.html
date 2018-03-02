@@ -12,7 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://jsdev.arcgis.com/4.7/esri/css/main.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
 
     <!-- Custom styles for this template -->
     <style>
@@ -136,6 +136,15 @@
         font-size: 24px;
       }
 
+      .esri-widget .esri-menu {
+        font-size: 16px;
+        line-height: 18px;
+      }
+
+      .esri-attribution {
+        text-align: left;
+      }
+
     </style>
 
   </head>
@@ -192,7 +201,7 @@
       <div class="bg-blue text-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
           <h2 class="display-5">Streets at Night</h2>
-          <p class="lead">And an even wittier subheading.</p>
+          <p class="lead">The world when it's dark.</p>
         </div>
         <div id="map3" class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
       </div>
@@ -262,14 +271,16 @@
 
     <!-- ArcGIS JS -->
 
-    <script src="https://jsdev.arcgis.com/4.7/"></script>
+    <script src="https://js.arcgis.com/4.7/"></script>
     <script>
       require([
         "esri/Map",
         "esri/views/MapView",
+        "esri/views/SceneView",
         "esri/widgets/Search",
+        "esri/core/watchUtils",
         "dojo/domReady!"
-      ], function(Map, MapView, Search) {
+      ], function(Map, MapView, SceneView, Search, watchUtils) {
 
         function overrideMapZoom(event) {
           // Stop mouse wheel event from zooming the map
@@ -286,16 +297,32 @@
           }
         }
 
-        function setViews(extent) {
+        function setExtents(extent, currentView) {
           if (extent) {
             for (var i = 0; i < views.length; i++) {
-              views[i].goTo({ target: extent });
+              var view = views[i];
+              if (view !== currentView) {
+                view.goTo({ target: extent });  
+              }
             }
           }
         }
 
+        function setWatches(){
+          for (var i = 0; i < views.length; i++) {
+            var view = views[i];
+            watchUtils.whenFalse(view,"interacting", function(newVal, oldVal, prop, targetView) {
+              if (targetView.ready && !newVal) {
+                watchUtils.whenFalseOnce(targetView, "updating", function(newVal, oldVal, prop, targetView){
+                  setExtents(targetView.extent,targetView);
+                });
+              }              
+            });
+          }
+        }
+
         var defaultCenter = [-79.38544, 43.64902];
-        var defaultZoom = 12;
+        var defaultZoom = 2;
 
         var views = [];
 
@@ -320,7 +347,7 @@
           zoom: defaultZoom
         }));
 
-        views.push(new MapView({
+        views.push(new SceneView({
           container: "map2",
           map: new Map({ basemap: "satellite" }),
           center: defaultCenter,
@@ -341,8 +368,7 @@
           zoom: defaultZoom
         }));
 
-        // Prevent panning on page scroll
-        removeViewsScroll();
+        setWatches(views);
 
         var search = new Search({
           container: "search"
@@ -350,9 +376,12 @@
 
         search.watch("selectedResult", function(result) {
           if (result) {
-            setViews(result.extent)
+            setExtents(result.extent)
           }
         });
+
+        // Prevent panning on page scroll
+        removeViewsScroll();
 
       });
     </script>
