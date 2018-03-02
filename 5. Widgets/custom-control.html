@@ -115,13 +115,13 @@
       });
 
       function setCoords(pt) {
-        if (!pt) {
-          return;
-        }
+        if (pt) {
+          var coords = pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + " | " +
+                       view.zoom + " | " +
+                       "1:" + Math.round(view.scale * 1) / 1;
 
-        coordsWidget.innerHTML = pt.latitude.toFixed(3) + " " + pt.longitude.toFixed(3) + " | " +
-                                 view.zoom + " | " +
-                                 "1:" + Math.round(view.scale * 1) / 1;
+          coordsWidget.innerHTML = coords;
+        }
       }
 
     });
