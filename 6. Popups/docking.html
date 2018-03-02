@@ -83,7 +83,7 @@
            width: 768
          }*/
         // Manually control docking and location
-        /*position: function(){
+        /*position: function() {
           if (view.widthBreakpoint === "xsmall") {
             return "bottom-center";
           }
@@ -102,16 +102,12 @@
       /*
       view.watch("widthBreakpoint", function(breakpoint) {
         var popup = view.popup;
-        if (breakpoint === "xsmall") {
-          popup.dockOptions = {
-            position: "top-center"
-          }
-        }
-        else {
-          popup.dockOptions = {
-            position: "bottom-center"
-          }
-        }
+        var position = breakpoint === "xsmall" ? "top-center" : "bottom-center";
+
+        popup.dockOptions = {
+          position: position
+        };
+
         popup.dockEnabled = true; // dock
       });
       */
