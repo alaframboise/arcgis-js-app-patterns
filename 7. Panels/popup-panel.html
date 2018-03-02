@@ -25,7 +25,7 @@
       font-size: 20px;
     }
 
-    .title, .message {
+    .title {
       flex: 1 1;
       margin: 15px;
     }
@@ -44,10 +44,8 @@
       "esri/WebMap",
       "esri/views/MapView",
       "esri/widgets/Legend",
-      "dojo/dom-construct",
-      "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Legend, domConstruct, query) {
+    ], function(WebMap, MapView, Legend) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -64,12 +62,10 @@
           dockOptions: {
             position: function() {
               this.dockEnabled = true;
-              if (this.view && this.view.widthBreakpoint === "xsmall") {
-                return "bottom-center";
-              }
-              else {
-                return "top-right";
-              }
+
+              var isMobileWidth = this.view && this.view.widthBreakpoint === "xsmall";
+
+              return isMobileWidth ? "bottom-center" : "top-right";
             },
             buttonEnabled: false
           }
@@ -78,21 +74,20 @@
 
       // Add custom button
 
-      var buttonWidget = domConstruct.create("div", {
-        id: "buttonWidget",
-        class: "esri-widget esri-component esri-widget-button esri-interactive",
-        innerHTML: "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>"
-      });
+      var buttonWidget = document.createElement("div");
+      buttonWidget.id = "buttonWidget";
+      buttonWidget.className = "esri-widget esri-component esri-widget-button esri-interactive";
+      buttonWidget.innerHTML = "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>";
 
       view.ui.add(buttonWidget, "top-left");
 
-      query(buttonWidget).on("click", function() {
+      buttonWidget.addEventListener("click", function() {
         showLegendInPopup();
       });
 
       // Add legend
 
-      var node = domConstruct.create("div");
+      var node = document.createElement("div");
       var legend = new Legend({
         view: view,
         container: node
@@ -107,8 +102,8 @@
 
       // Show popup header buttons
 
-      popup.watch("features", function(f) {
-        if (f.length) {
+      popup.watch("features", function(features) {
+        if (features.length) {
           showButtons(true);
         }
       });
