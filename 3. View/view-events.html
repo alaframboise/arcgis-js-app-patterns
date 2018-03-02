@@ -37,7 +37,7 @@
       align-self: flex-start;
     }
 
-    .message,.message2 {
+    .message, .message2 {
       align-self: flex-end;
     }
 
@@ -61,10 +61,11 @@
   <script>
     require([
       "esri/Map",
+      "esri/core/watchUtils",
       "esri/views/MapView",
       "dojo/query",
       "dojo/domReady!"
-    ], function(Map, MapView, query) {
+    ], function(Map, watchUtils, MapView, query) {
 
       var map = new Map({ basemap: "dark-gray" });
 
@@ -77,34 +78,28 @@
 
       // Define mobile size
 
-      var mobileBreak = 544;
+      var mobileSize = 544;
 
-      setTitleVisible(view.width > mobileBreak);
+      setTitleVisible(view.width > mobileSize);
 
       var msg1 = query(".message")[0];
       var msg2 = query(".message2")[0];
 
-      msg1.innerHTML = "Size: " + JSON.stringify(view.size);
-      msg2.innerHTML = "Resizing:";
+      // 1. Watch size changes
 
-      // 1. Watch size chagnes
-
-      view.watch("size", function(size) {
+      watchUtils.init(view, "size", function(size) {
         msg1.innerHTML = "Size: " + JSON.stringify(size);
+
+        setTitleVisible(view.width > mobileSize);
       });
 
       // 2. Watch resizing changes
 
-      view.watch("resizing", function(resizing) {
-        if (!resizing) {
-          msg2.innerHTML = "Resizing: " + view.width;
-          if (view.width > mobileBreak) {
-            setTitleVisible(true);
-          }
-          else {
-            setTitleVisible(false);
-          }
-        }
+      watchUtils.init(view, "resizing", function(resizing) {
+        var happyEmoji = "&#x1F601;";
+        var sadEmoji = "&#x1F62D;";
+
+        msg2.innerHTML = "Resizing? " + (resizing ? happyEmoji : sadEmoji);
       });
 
       // Show/hide elements, add/remove padding
@@ -112,11 +107,11 @@
       function setTitleVisible(visible) {
         if (visible) {
           query(".header").removeClass("invisible");
-          view.padding = { top: 55 }
+          view.padding = { top: 55 };
         }
         else {
           query(".header").addClass("invisible");
-          view.padding = { top: 0 }
+          view.padding = { top: 0 };
         }
       }
 
