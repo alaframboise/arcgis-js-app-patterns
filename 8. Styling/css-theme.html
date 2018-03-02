@@ -58,9 +58,7 @@
     /* Focus/hover states */
 
     .theme .esri-widget-button:focus,
-    .theme .esri-widget-button:hover,
-    .theme .esri-widget .esri-menu li:focus,
-    .theme .esri-widget .esri-menu li:hover {
+    .theme .esri-widget-button:hover {
       background-color: #b35c00;
       color: #f8f8f8;
     }
@@ -76,12 +74,11 @@
     .theme .esri-home.esri-widget-button {
       width: 28px;
       height: 28px;
-      /*font-size: 12px; */
     }
 
-    .theme .esri-zoom .esri-widget-button .esri-icon,
-    .theme .esri-home.esri-widget-button .esri-icon {
-      font-size: 13px;
+    .theme .esri-widget [class*="esri-icon"], 
+    .theme .esri-widget [role="button"] [class*="esri-icon"] {
+      font-size: 14px;
     }
 
     /* Basemap Toggle - Little smaller */
@@ -115,7 +112,8 @@
     /* Search - Do not override */
 
     .theme .esri-widget.esri-search,
-    .theme .esri-search .esri-widget-button {
+    .theme .esri-search .esri-widget-button,
+    .theme .esri-widget .esri-menu {
       background-color: #f8f8f8;
       color: #696969;
     }
@@ -126,10 +124,7 @@
     }
 
     .theme .esri-search .esri-widget-button,
-    .theme .esri-search .esri-search__input {
-      font-size: 12px;
-    }
-
+    .theme .esri-search .esri-search__input,
     .theme .esri-widget .esri-menu {
       font-size: 12px;
       line-height: 14px;
