@@ -47,10 +47,8 @@
       "esri/WebMap",
       "esri/views/MapView",
       "esri/widgets/Legend",
-      "dojo/dom-construct",
-      "dojo/query",
       "dojo/domReady!"
-    ], function(WebMap, MapView, Legend, domConstruct, query) {
+    ], function(WebMap, MapView, Legend) {
 
       var webmap = new WebMap({
         portalItem: {
@@ -66,11 +64,10 @@
 
       // Add custom button with calcite icon
 
-      var buttonWidget = domConstruct.create("div", {
-        id: "buttonWidget",
-        class: "esri-widget esri-component esri-widget-button esri-interactive",
-        innerHTML: "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>"
-      });
+      var buttonWidget = document.createElement("div");
+      buttonWidget.id = "buttonWidget";
+      buttonWidget.className = "esri-widget esri-component esri-widget-button esri-interactive";
+      buttonWidget.innerHTML = "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>";
 
       view.ui.add(buttonWidget, "top-left");
 
@@ -84,8 +81,8 @@
 
       // Toggle legend
 
-      query(buttonWidget).on("click", function() {
-        query(legend.container).toggleClass("hidden");
+      buttonWidget.addEventListener("click", function() {
+        legend.container.classList.toggle("hidden");
       });
 
     });
