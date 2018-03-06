@@ -58,19 +58,32 @@
       // Configure popup
       view.popup = {
         dockOptions: {
-          breakpoint: false  // prevent docking
+          breakpoint: false  // prevent auto docking
         },
-        alignment: "top-center"
+        alignment: view.widthBreakpoint === "xsmall" ? "top-center" : "auto"
       };
 
       // Auto-center view
 
       view.popup.watch("selectedFeature", function(feature) {
-        if (feature) {
+        if (view.widthBreakpoint === "xsmall" && feature) {
           view.goTo({
             target: feature,
             scale: view.scale
           });
+        }
+      });
+
+      view.watch("resizing", function(resizing){
+        if (!resizing) {
+          var small = view.widthBreakpoint === "xsmall";
+          view.popup.alignment = small ? "top-center" : "auto";
+          if (small && view.popup.visible) {
+            view.goTo({
+              target: view.popup.location,
+              scale: view.scale
+            });
+          }
         }
       });
 
@@ -80,7 +93,7 @@
 </head>
 <body>
   <div class="header">
-    <div class="title">Popups - Auto-center</div>
+    <div class="title">Popups - Auto-center Mobile</div>
   </div>
   <div id="viewDiv"></div>
 </body>

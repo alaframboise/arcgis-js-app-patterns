@@ -87,25 +87,25 @@
 
       // 1. Manually control docking and location
 
-      /*
-      popup.dockOptions = {
-        breakpoint: false, // Disable auto docking
-        breakpoint: {
-           width: 768
-         }
+      
+      // popup.dockOptions = {
+        // breakpoint: false, // Disable auto docking
+        // breakpoint: {
+        //    width: 768
+        //  }
         // Manually control docking and location
-        position: function() {
-          if (view.widthBreakpoint === "xsmall") {
-            return "bottom-center";
-          }
-          else {
-            //popup.dockEnabled = true;
-            return "top-right";
-          }
-        },
+        // position: function() {
+        //   if (view.widthBreakpoint === "xsmall") {
+        //     return "bottom-center";
+        //   }
+        //   else {
+        //     //popup.dockEnabled = true;
+        //     return "top-right";
+        //   }
+        // },
         //buttonEnabled: false
-      };
-      */
+      //};
+      
 
       // 2. Manually control docking and location
 
@@ -124,7 +124,7 @@
 
       // Sync legend with popup
 
-      popup.watch(["dockEnabled", "visible"], function() {
+      popup.watch(["dockEnabled", "visible", "currentDockPosition"], function() {
         var positionCollision = view.popup.dockOptions.position === "top-right" || view.popup.dockOptions.position === "auto";
         if (view.popup.dockEnabled && positionCollision && view.popup.visible) {
           legend.container.classList.add("invisible");
@@ -150,10 +150,11 @@
 
       breakChooser.addEventListener("change", function(e) {
         var breakpoint = e.target.options[e.target.selectedIndex].value;
-        if (breakpoint == "true") {
-          popup.dockOptions.breakpoint = true;
+        if (breakpoint == "default") {
+          popup.dockOptions.breakpoint = { width: view.breakpoints.xsmall };
         } else if (breakpoint == "false") {
           popup.dockOptions.breakpoint = false;
+          popup.dockEnabled = false;
         } else {
           popup.dockOptions.breakpoint = { width: parseInt(breakpoint) };
         }
@@ -176,11 +177,12 @@
       <option value="bottom-left">bottom-left</option>
     </select>
     <select name="breakpoint" id="breakpoint" class="breakpoint-select">
-      <option value="true">true</option>
+      <option value="default">default</option>
       <option value="false">false</option>
       <option value="400">400px</option>
       <option value="544">544px</option>
       <option value="768">768px</option>
+      <option value="1024">1024px</option>
     </select>
   </div>
   <div id="viewDiv"></div>
