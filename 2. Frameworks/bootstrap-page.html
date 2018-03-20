@@ -136,6 +136,15 @@
         font-size: 24px;
       }
 
+      .esri-widget.esri-search input[type="text"] {
+        height: auto;
+      }
+
+      .esri-search__submit-button, .esri-search__clear-button {
+          border: solid 1px rgba(50,50,50,0.25);
+          border-left: none;
+      }
+
       .esri-widget .esri-menu {
         font-size: 16px;
         line-height: 18px;
@@ -270,7 +279,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
 
     <!-- ArcGIS JS -->
-    <script>var dojoConfig = { has: { "esri-promise-compatibility": 1 } };</script>
+  
     <script src="https://js.arcgis.com/4.7/"></script>
     <script>
       require([
