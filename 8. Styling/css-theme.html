@@ -43,7 +43,7 @@
     /* Widget containers and all buttons */
 
     .theme .esri-widget,
-    .theme .esri-widget-button,
+    .theme .esri-widget--button,
     .theme .esri-widget .esri-menu,
     .theme .esri-widget table,
     .theme .esri-popup__main-container,
@@ -57,8 +57,8 @@
 
     /* Focus/hover states */
 
-    .theme .esri-widget-button:focus,
-    .theme .esri-widget-button:hover {
+    .theme .esri-widget--button:focus,
+    .theme .esri-widget--button:hover {
       background-color: #b35c00;
       color: #f8f8f8;
     }
@@ -70,15 +70,15 @@
 
     /* Zoom - Safer to resize individual buttons */
 
-    .theme .esri-zoom .esri-widget-button,
-    .theme .esri-home.esri-widget-button {
+    .theme .esri-zoom .esri-widget--button,
+    .theme .esri-home.esri-widget--button {
       width: 28px;
       height: 28px;
     }
 
     .theme .esri-widget [class*="esri-icon"], 
     .theme .esri-widget [role="button"] [class*="esri-icon"] {
-      font-size: 14px;
+      font-size: 12px;
     }
 
     /* Basemap Toggle - Little smaller */
@@ -138,9 +138,9 @@
 
   </style>
 
-  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
 
-  <script src="https://js.arcgis.com/4.7/"></script>
+  <script src="https://js.arcgis.com/4.10/"></script>
 
   <script>
     require([
@@ -150,8 +150,7 @@
       "esri/widgets/Legend",
       "esri/widgets/BasemapToggle",
       "esri/widgets/ScaleBar",
-      "esri/widgets/Search",
-      "dojo/domReady!"
+      "esri/widgets/Search"
     ], function(WebMap, MapView, Home, Legend, BasemapToggle, Scalebar, Search) {
 
       var webmap = new WebMap({

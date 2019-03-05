@@ -36,16 +36,15 @@
 
   </style>
 
-  <link rel="stylesheet" href="https://js.arcgis.com/4.7/esri/css/main.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
 
-  <script src="https://js.arcgis.com/4.7/"></script>
+  <script src="https://js.arcgis.com/4.10/"></script>
 
   <script>
     require([
       "esri/WebMap",
       "esri/views/MapView",
-      "esri/widgets/Legend",
-      "dojo/domReady!"
+      "esri/widgets/Legend"
     ], function(WebMap, MapView, Legend) {
 
       var webmap = new WebMap({
@@ -77,7 +76,7 @@
 
       var buttonWidget = document.createElement("div");
       buttonWidget.id = "buttonWidget";
-      buttonWidget.className = "esri-widget esri-component esri-widget-button esri-interactive";
+      buttonWidget.className = "esri-widget esri-component esri-widget--button esri-interactive";
       buttonWidget.innerHTML = "<span aria-hidden='true' role='presentation' class='esri-icon esri-icon-layers'></span>";
 
       view.ui.add(buttonWidget, "top-left");

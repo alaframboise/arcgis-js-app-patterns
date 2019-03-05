@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>App Design and CSS - Custom + Panel + Click</title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+  <script src="https://js.arcgis.com/4.10/"></script>
+
+  <style>
+    html,
+    body,
+    #mapViewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .mapView {
+      height: 400px;
+      border: 1px solid #A8A8A8;
+    }
+
+    .esri-popup.esri-widget {
+      max-height: 100%;
+    }
+
+    .esri-view-width-xlarge .esri-popup__main-container {
+      width: 350px;
+    }
+
+    .esri-view-height-less-than-medium .esri-popup__main-container {
+      max-height: 500px;
+    }
+  </style>
+
+  <script>
+    require([
+      "esri/layers/FeatureLayer",
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/views/SceneView",
+      "esri/Graphic"
+    ], function(
+      FeatureLayer, Map, MapView, SceneView, Graphic) {
+
+      // Create the mapView
+      var mapView = new MapView({
+        map: new Map({
+          basemap: "streets-vector"
+        }),
+        container: "mapViewDiv",
+        center: [-107.878,37.265],
+        zoom: 12,
+        popup: {
+          actions: [],
+          dockEnabled: true,
+          dockOptions: {
+            buttonEnabled: true,
+            breakpoint: false
+          }
+        }
+      });
+
+      mapView.when(function() {
+        // It's necessary to overwrite the default click for the popup
+        // behavior in order to display your own popup
+        mapView.popup.autoOpenEnabled = false;
+        
+        mapView.on("click", function(event) {
+          if (event && event.mapPoint) {
+            var lat = Math.round(event.mapPoint.latitude * 10000) / 10000;
+            var lon = Math.round(event.mapPoint.longitude * 10000) / 10000;
+            mapView.popup.open({
+              title: lon + ", " + lat,
+              location: event.mapPoint, // Set the location of the popup to the clicked location
+              content: setContentInfo(
+                event.mapPoint,
+                mapView.scale
+              )
+            });
+          } else {
+            mapView.popup.open({
+              title: "Invalid point location",
+              location: event.mapPoint,
+              content: "Please click on a valid location."
+            });
+          }
+        });
+
+        function setContentInfo(center, scale) {
+          var popupDiv = document.createElement("div");
+          popupDiv.classList.add("mapView");
+
+          var popupView = new SceneView({
+            container: popupDiv,
+            map: new Map({
+              basemap: "satellite",
+              ground: "world-elevation"
+            }),
+            center: center,
+            scale: mapView.scale *
+              .065 *
+              Math.max(mapView.width / 250, mapView.height /
+                250),
+            constraints: {
+              rotationEnabled: true
+            },
+            ui: {
+              components: []
+            }
+          });
+          popupView.when(function(){
+            popupView.goTo({
+              tilt: 70,
+              target: center
+            }).then(function(){
+              popupView.graphics.add(
+                new Graphic({
+                  geometry: center,
+                  symbol: {
+                    type: "simple-marker",
+                    color: "red",
+                    size: 6
+                  }
+                })
+              )
+            });
+          });
+          
+          return popupView.container;
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="mapViewDiv"></div>
+</body>
+
+</html>
